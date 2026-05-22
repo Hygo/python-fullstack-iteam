@@ -1,0 +1,46 @@
+[
+    {
+        "id": 1,
+        "nome": "Leticia",
+        "email": "leticia@email.com",
+        "idade": 20,
+        "notas": [
+            8.0,
+            9.0
+        ],
+        "ativo": true
+    },
+    {
+        "id": 2,
+        "nome": "Rafael",
+        "email": "rafael@email.com",
+        "idade": 21,
+        "notas": [
+            7.0,
+            6.0
+        ],
+        "ativo": true
+    },
+    {
+        "id": 3,
+        "nome": "Maria",
+        "email": "maria@email.com",
+        "idade": 19,
+        "notas": [
+            10.0,
+            9.5
+        ],
+        "ativo": true
+    },
+    {
+        "id": 4,
+        "nome": "Lucas",
+        "email": "lucas@email.com",
+        "idade": 22,
+        "notas": [
+            5.0,
+            6.5
+        ],
+        "ativo": true
+    }
+]
