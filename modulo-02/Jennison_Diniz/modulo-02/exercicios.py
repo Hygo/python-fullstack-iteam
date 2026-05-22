@@ -602,4 +602,4 @@ if __name__ == "__main__":
     # ex12_analisador_senha()
     # ex13_caixa_eletronico()
     # ex14_leitura_notas_turma()
-    # ex15_menu_sistema()
+    ex15_menu_sistema()
