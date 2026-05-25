@@ -1,0 +1,20 @@
+{
+  "app": {
+    "nome": "FullStack API",
+    "versao": "1.0.0",
+    "debug": false,
+    "porta": 8000
+  },
+  "banco": {
+    "host": "localhost",
+    "porta": 5432,
+    "nome": "fullstack_db",
+    "pool_tamanho": 10
+  },
+  "email": {
+    "smtp_host": "smtp.gmail.com",
+    "smtp_porta": 587,
+    "remetente": "no-reply@fullstack.com",
+    "tls": true
+  }
+}
