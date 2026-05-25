@@ -1,0 +1,12 @@
+{
+  "id": 101,
+  "nome": "Smartphone X",
+  "preco": 1999.9,
+  "estoque": 35,
+  "disponivel": true,
+  "categorias": [
+    "Eletrônicos",
+    "Celulares",
+    "Promoção"
+  ]
+}
