@@ -1,0 +1,27 @@
+[
+  {
+    "timestamp": "2026-05-24T01:06:32",
+    "nivel": "INFO",
+    "mensagem": "Aplicação iniciada com sucesso"
+  },
+  {
+    "timestamp": "2026-05-24T01:06:32",
+    "nivel": "INFO",
+    "mensagem": "Usuário 'João' autenticado"
+  },
+  {
+    "timestamp": "2026-05-24T01:06:32",
+    "nivel": "WARNING",
+    "mensagem": "Tentativa de acesso a recurso restrito"
+  },
+  {
+    "timestamp": "2026-05-24T01:06:32",
+    "nivel": "ERROR",
+    "mensagem": "Falha ao conectar ao banco de dados"
+  },
+  {
+    "timestamp": "2026-05-24T01:06:32",
+    "nivel": "WARNING",
+    "mensagem": "Certificado SSL expira em 7 dias"
+  }
+]
