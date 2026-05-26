@@ -1,0 +1,10 @@
+{
+    "id": 1,
+    "nome": "Arroz",
+    "preco": 3.89,
+    "estoque": 500,
+    "disponivel": true,
+    "categorias": [
+        "Alimenta\u00e7\u00e3o"
+    ]
+}
