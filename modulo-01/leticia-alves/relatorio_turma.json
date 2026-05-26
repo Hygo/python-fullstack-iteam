@@ -1,0 +1,26 @@
+{
+    "total_alunos": 4,
+    "media_geral": 7.625,
+    "aluno_maior_media": {
+        "id": 3,
+        "nome": "Maria",
+        "email": "maria@email.com",
+        "idade": 19,
+        "notas": [
+            10.0,
+            9.5
+        ],
+        "ativo": true
+    },
+    "aluno_menor_media": {
+        "id": 4,
+        "nome": "Lucas",
+        "email": "lucas@email.com",
+        "idade": 22,
+        "notas": [
+            5.0,
+            6.5
+        ],
+        "ativo": true
+    }
+}
