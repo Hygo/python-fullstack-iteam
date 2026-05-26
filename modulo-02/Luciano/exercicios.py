@@ -4,8 +4,8 @@
 MÓDULO 2 – Estruturas de Controle
 Curso de Capacitação Full Stack – ITEAM
 
-Aluno(a): <SEU NOME COMPLETO AQUI>
-Data    : <DATA DE ENTREGA>
+Aluno(a): Luciano dos Santos Nascimento
+Data    : 26/05/2026
 =============================================================
 
 INSTRUÇÕES:
@@ -37,8 +37,18 @@ def ex01_classificador_temperatura():
         25 a 34   → ☀️ Quente
         >= 35     → 🔥 Muito quente
     """
-    # SUA SOLUÇÃO AQUI
-    pass
+    temperatura = float(input("Digite a temperatura para podemos classificala: "))
+    if temperatura < 0:
+        print(f"Temperatura: {temperatura}\nClassificação: Congelante❄️")
+    elif temperatura >= 0 and temperatura <= 14:
+        print(f"Temperatura: {temperatura}\nClassificação: Frio⛄")
+    elif temperatura > 14 and temperatura <= 24:
+        print(f"Temperatura: {temperatura}\nClassificação: Agradavel😊")
+    elif temperatura > 24 and temperatura <= 34:
+        print(f"Temperatura: {temperatura}\nClassificação:  Quente🥵")
+    else:
+        print(f"Temperatura: {temperatura}\nClassificação: Muito quente🔥")
+
 
 
 # ==============================================================
@@ -54,7 +64,17 @@ def ex02_validador_acesso():
         senha   → "iteam2025"
     """
     # SUA SOLUÇÃO AQUI
-    pass
+    usuario = "admin"
+    senha = "iteam2025"
+    user = input("Digite o usuario: ")
+    password = input("Digite a senha: ")
+    if usuario == user and senha == password:
+        print("✅ Acesso liberado. Bem-vindo!")
+    elif usuario == user and senha != password:
+        print("❌ Senha incorreta.")
+    else:
+        print("❌ Usuário não encontrado.")
+
 
 
 # ==============================================================
@@ -109,7 +129,16 @@ def ex06_filtro_continue():
     leituras = [12.5, None, 8.3, None, 15.0, 9.7, None, 11.2, 6.8, None]
 
     # SUA SOLUÇÃO AQUI
-    pass
+    leituras = [12.5, None, 8.3, None, 15.0, 9.7, None, 11.2, 6.8, None]
+    contador = 0
+    notas = 0
+    for l in leituras:
+        if l == None:
+            contador += 1
+            continue
+        notas += l
+    print("Total: ", notas, " Media: ", notas/10, " Registros nones: ", contador)
+
 
 
 # ==============================================================
@@ -128,8 +157,17 @@ def ex07_validacao_nota():
         < 5.0      → D – Insuficiente
     """
     # SUA SOLUÇÃO AQUI
-    pass
-
+    nota = float(input("Digite a nota: "))
+    while nota >= 0 and nota <= 10 :
+        if 9.0 <= nota >= 10.:
+            print("A – Excelente")
+        elif 7.0 <= nota >= 10.0:
+            print("B – Bom")
+        elif 5.0 <= nota >= 6.9:
+            print("C – Regular")
+        else:
+            print("D – Insuficiente")
+            
 
 # ==============================================================
 # EXERCÍCIO 08 – Calculadora com try/except
@@ -142,7 +180,42 @@ def ex08_calculadora_segura():
     Usa else para exibir o resultado e finally para encerrar.
     """
     # SUA SOLUÇÃO AQUI
-    pass
+    def somar(a, b):
+        return a + b
+    def sub(a, b):
+        return a - b
+    def mult(a, b):
+        return a * b
+    def div(a, b):
+        return a/b
+   
+    operadores = {
+        "somar": somar,
+        "subtrair": sub,
+        "dividir": div,
+        "multiplicar": mult
+    }
+    try:
+        numero_um = int(input("Digite o primeiro numero: "))
+        numero_dois = int(input("Digite o primeiro numero: "))
+        operacao = input("Escolha uma operação\n1-Somar\n2-Dividir\n3-Multiplicar\n4-Subtrair\nFaça sua escolha: ")
+        fn = operadores[operacao.lower()]
+        resultado = fn(numero_um, numero_dois)
+    except ZeroDivisionError:
+        print("Não dá para dividir por zero")
+    except ValueError:
+        print("Valor invalido")
+    except KeyError:
+        print("Deu ruim, essa não é uma das opções")
+    except IndexError as errou:
+        print(f"Deu ruim {errou}")
+    else:
+        print(f"O resultado é {resultado}")
+    finally:
+        print("Está tudo acabado")
+
+    
+
 
 
 # ==============================================================
@@ -161,7 +234,17 @@ def ex09_padrao_numerico():
     Desafio extra: gera também o triângulo decrescente logo abaixo.
     """
     # SUA SOLUÇÃO AQUI
-    pass
+    numero = int(input("Digite um numero maior que zero: "))
+    contador = 1
+    while numero > 0:
+        for i in range(1, contador+1):
+            print(i, end=" ")
+        print("")
+        contador += 1
+        numero -= 1
+
+
+    
 
 
 # ==============================================================
@@ -178,7 +261,13 @@ def ex10_jogo_adivinhacao():
     numero_secreto = random.randint(1, 100)
 
     # SUA SOLUÇÃO AQUI
-    pass
+    for i in range(7):
+        tenta = int(input("Digite um numero"))
+        if tenta == numero_secreto:
+            print("Você acertou")
+            break
+        else:
+            print("Errou tente novamente")
 
 
 # ==============================================================
@@ -193,7 +282,34 @@ def ex11_numero_primo():
     Otimização: verifica divisores somente até √n.
     """
     # SUA SOLUÇÃO AQUI
-    pass
+    import math
+    try:
+        numero = int(input("Digite um numero inteiro: "))
+        if numero <= 1:
+            print(f"{numero} não é primo.")
+            return
+
+        # O número 2 é o único primo par
+        if numero == 2:
+            print(f"{numero} é primo.")
+            return
+
+        # Elimina todos os outros números pares
+        if numero % 2 == 0:
+            print(f"{numero} não é primo.")
+            return
+
+        # Testa os divisores ímpares desde 3 até a raiz quadrada do número
+        limite = int(math.sqrt(numero)) + 1
+        for i in range(3, limite, 2):
+            if numero % i == 0:
+                print(f"{numero} não é primo.")
+                return
+
+        print(f"{numero} é primo.")
+
+    except ValueError:
+        print("❌ Entrada inválida. Digite um número inteiro.")
 
 
 # ==============================================================
@@ -212,7 +328,25 @@ def ex12_analisador_senha():
     Exibe relatório com ✅ ou ❌ para cada critério.
     """
     # SUA SOLUÇÃO AQUI
-    pass
+    senha = input("Digite sua senha: ")
+
+    tem_minimo      = len(senha) >= 8
+    tem_maiuscula   = any(c.isupper() for c in senha)
+    tem_minuscula   = any(c.islower() for c in senha)
+    tem_digito      = any(c.isdigit() for c in senha)
+    tem_especial    = any(c in "!@#$%^&*" for c in senha)
+
+    print("\n--- Relatório de Segurança ---")
+    print(f"{'✅' if tem_minimo    else '❌'} Mínimo 8 caracteres")
+    print(f"{'✅' if tem_maiuscula else '❌'} Pelo menos 1 letra maiúscula")
+    print(f"{'✅' if tem_minuscula else '❌'} Pelo menos 1 letra minúscula")
+    print(f"{'✅' if tem_digito    else '❌'} Pelo menos 1 dígito")
+    print(f"{'✅' if tem_especial  else '❌'} Pelo menos 1 caractere especial (!@#$%^&*)")
+
+    if all([tem_minimo, tem_maiuscula, tem_minuscula, tem_digito, tem_especial]):
+        print("\n🔒 Senha FORTE!")
+    else:
+        print("\n⚠️  Senha FRACA. Corrija os critérios marcados com ❌.")
 
 
 # ==============================================================
@@ -228,7 +362,29 @@ def ex13_caixa_eletronico():
     cedulas = [200, 100, 50, 20, 10]
 
     # SUA SOLUÇÃO AQUI
-    pass
+    try:
+        valor = int(input("Digite o valor do saque (múltiplo de R$10, máx R$3.000): "))
+
+        if valor <= 0:
+            print("❌ O valor deve ser positivo.")
+            return
+        if valor > 3000:
+            print("❌ Valor máximo permitido é R$3.000.")
+            return
+        if valor % 10 != 0:
+            print("❌ O valor deve ser múltiplo de R$10.")
+            return
+
+        print(f"\n💵 Saque de R${valor} — cédulas utilizadas:")
+        restante = valor
+        for cedula in cedulas:
+            quantidade = restante // cedula
+            if quantidade > 0:
+                print(f"   R${cedula:>3} × {quantidade}")
+                restante -= cedula * quantidade
+
+    except ValueError:
+        print("❌ Entrada inválida. Digite um número inteiro.")
 
 
 # ==============================================================
@@ -244,7 +400,38 @@ def ex14_leitura_notas_turma():
     notas = []
 
     # SUA SOLUÇÃO AQUI
-    pass
+    print("Digite as notas dos alunos (ou 'fim' para encerrar):")
+    while True:
+        entrada = input("Nota: ").strip()
+
+        if entrada.lower() == "fim":
+            break
+
+        try:
+            nota = float(entrada)
+            if nota < 0 or nota > 10:
+                print("⚠️  Nota inválida. Digite um valor entre 0 e 10.")
+                continue
+            notas.append(nota)
+        except ValueError:
+            print("⚠️  Entrada inválida. Digite um número ou 'fim' para encerrar.")
+            continue
+
+    if not notas:
+        print("Nenhuma nota válida foi registrada.")
+        return
+
+    total  = sum(notas)
+    media  = total / len(notas)
+    maior  = max(notas)
+    menor  = min(notas)
+
+    print(f"\n--- Resultado da Turma ---")
+    print(f"Total de notas : {len(notas)}")
+    print(f"Soma           : {total:.1f}")
+    print(f"Média          : {media:.2f}")
+    print(f"Maior nota     : {maior:.1f}")
+    print(f"Menor nota     : {menor:.1f}")
 
 
 # ==============================================================
@@ -276,7 +463,81 @@ def ex15_menu_sistema():
         print("=" * 29)
 
         # SUA SOLUÇÃO AQUI — leia a opção e implemente cada funcionalidade
-        pass
+        try:
+            opcao = input("Escolha uma opção: ").strip()
+        except ValueError:
+            print("❌ Entrada inválida.")
+            continue
+
+        if opcao == "0":
+            print("👋 Saindo do sistema. Até logo!")
+            break
+
+        elif opcao == "1":
+            # Conversor Celsius → Fahrenheit
+            try:
+                celsius = float(input("Digite a temperatura em Celsius: "))
+                fahrenheit = celsius * 9 / 5 + 32
+                print(f"🌡️  {celsius}°C = {fahrenheit:.1f}°F")
+            except ValueError:
+                print("❌ Valor inválido.")
+
+        elif opcao == "2":
+            # Verificador de número primo (versão simplificada)
+            import math
+            try:
+                numero = int(input("Digite um número inteiro positivo: "))
+                if numero < 2:
+                    print(f"{numero} não é primo.")
+                else:
+                    primo = True
+                    for i in range(2, int(math.sqrt(numero)) + 1):
+                        if numero % i == 0:
+                            primo = False
+                            break
+                    print(f"{'✅' if primo else '❌'} {numero} {'é' if primo else 'não é'} primo.")
+            except ValueError:
+                print("❌ Digite um número inteiro.")
+
+        elif opcao == "3":
+            # Analisador de senha (comprimento e dígito)
+            senha = input("Digite a senha: ")
+            tem_minimo = len(senha) >= 8
+            tem_digito = any(c.isdigit() for c in senha)
+            print(f"{'✅' if tem_minimo else '❌'} Mínimo 8 caracteres")
+            print(f"{'✅' if tem_digito else '❌'} Pelo menos 1 dígito")
+            if tem_minimo and tem_digito:
+                print("🔒 Senha OK!")
+            else:
+                print("⚠️  Senha fraca.")
+
+        elif opcao == "4":
+            # Calculadora segura
+            try:
+                a = float(input("Primeiro número: "))
+                b = float(input("Segundo número : "))
+                op = input("Operação (+, -, *, /): ").strip()
+                if op == "+":
+                    resultado = a + b
+                elif op == "-":
+                    resultado = a - b
+                elif op == "*":
+                    resultado = a * b
+                elif op == "/":
+                    if b == 0:
+                        raise ZeroDivisionError
+                    resultado = a / b
+                else:
+                    print("❌ Operação inválida.")
+                    continue
+                print(f"✅ Resultado: {resultado}")
+            except ValueError:
+                print("❌ Valor inválido.")
+            except ZeroDivisionError:
+                print("❌ Não é possível dividir por zero.")
+
+        else:
+            print("❌ Opção inválida. Tente novamente.")
 
 
 # ==============================================================
@@ -286,7 +547,7 @@ def ex15_menu_sistema():
 if __name__ == "__main__":
     print("\n" + "=" * 50)
     print("MÓDULO 2 – Estruturas de Controle")
-    print(f"Aluno(a): <SEU NOME>")
+    print(f"Aluno(a): Luciano dos Santos Nascimento")
     print("=" * 50)
 
     # Descomente linha por linha conforme for resolvendo:
