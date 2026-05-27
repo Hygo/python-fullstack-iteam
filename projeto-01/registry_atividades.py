@@ -82,16 +82,37 @@ DICA:
 
 # SUA SOLUÇÃO AQUI ↓↓↓
 
-# OPERACOES_REGISTRY: dict = { ... }
+import math
 
-# def calcular_depois(operacao: str, a: float, b: float) -> float:
-#     ...
+def _divisao(a: float, b: float) -> float:
+    if b == 0:
+        raise ZeroDivisionError("Divisão por zero.")
+    return a / b
 
-# print("\n[DEPOIS]")
-# print(calcular_depois("soma",          10, 3))
-# print(calcular_depois("multiplicacao", 10, 3))
-# print(calcular_depois("raiz",          16, 0))   # nova operação!
+OPERACOES_REGISTRY: dict = {
+    "soma": lambda a, b: a + b,
+    "subtracao": lambda a, b: a - b,
+    "multiplicacao": lambda a, b: a * b,
+    "divisao": _divisao,
+    "potencia": lambda a, b: a ** b,
+    "modulo": lambda a, b: a % b,
+    "raiz": lambda a, b: math.sqrt(a)
+}
 
+def calcular_depois(operacao: str, a: float, b: float) -> float:
+    handler = OPERACOES_REGISTRY.get(operacao)
+    if handler is None:
+        raise ValueError(f"Operação desconhecida: {operacao}")
+    return handler(a, b)
+
+print("\n[DEPOIS]")
+print(calcular_depois("soma",          10, 3))
+print(calcular_depois("subtracao",     10, 3))
+print(calcular_depois("multiplicacao", 10, 3))
+print(calcular_depois("divisao",       10, 4))
+print(calcular_depois("potencia",      2,  8))
+print(calcular_depois("modulo",        10, 3))
+print(calcular_depois("raiz",          16, 0))   # nova operação!
 
 # ==============================================================
 # 🟢 ATIVIDADE 2 — Sistema de Relatórios
@@ -159,22 +180,61 @@ DICA:
 
 # SUA SOLUÇÃO AQUI ↓↓↓
 
-# class Registry: ...
+import json
 
-# def _relatorio_resumo(dados: dict) -> None: ...
-# def _relatorio_detalhado(dados: dict) -> None: ...
-# ...
+class Registry:
+    def __init__(self):
+        self._store = {}
+        
+    def register(self, chave: str, valor: callable) -> None:
+        self._store[chave] = valor
+        
+    def get(self, chave: str) -> callable:
+        if chave not in self._store:
+            raise ValueError(f"Formato desconhecido: {chave}")
+        return self._store[chave]
 
-# relatorio_registry = Registry()
-# relatorio_registry.register("resumo", _relatorio_resumo)
-# ...
+def _relatorio_resumo(dados: dict) -> None:
+    print(f"[RESUMO] Total de itens: {len(dados)}")
+    for k, v in dados.items():
+        print(f"  {k}: {v}")
 
-# def gerar_relatorio_depois(formato: str, dados: dict) -> None:
-#     ...
+def _relatorio_detalhado(dados: dict) -> None:
+    print("[DETALHADO] ─────────────────")
+    for k, v in dados.items():
+        tipo = type(v).__name__
+        print(f"  {k:15} | {str(v):20} | tipo: {tipo}")
+    print("─────────────────────────────")
 
-# print("\n[DEPOIS]")
-# gerar_relatorio_depois("resumo",     dados_exemplo)
-# gerar_relatorio_depois("json_pretty", dados_exemplo)  # nova!
+def _relatorio_contagem(dados: dict) -> None:
+    print(f"[CONTAGEM] {len(dados)} campo(s) registrado(s).")
+
+def _relatorio_chaves(dados: dict) -> None:
+    print(f"[CHAVES] {list(dados.keys())}")
+
+def _relatorio_valores(dados: dict) -> None:
+    print(f"[VALORES] {list(dados.values())}")
+
+def _relatorio_json_pretty(dados: dict) -> None:
+    print(f"[JSON PRETTY]\n{json.dumps(dados, indent=2, ensure_ascii=False)}")
+
+relatorio_registry = Registry()
+relatorio_registry.register("resumo", _relatorio_resumo)
+relatorio_registry.register("detalhado", _relatorio_detalhado)
+relatorio_registry.register("contagem", _relatorio_contagem)
+relatorio_registry.register("chaves", _relatorio_chaves)
+relatorio_registry.register("valores", _relatorio_valores)
+relatorio_registry.register("json_pretty", _relatorio_json_pretty)
+
+def gerar_relatorio_depois(formato: str, dados: dict) -> None:
+    handler = relatorio_registry.get(formato)
+    handler(dados)
+
+print("\n[DEPOIS]")
+gerar_relatorio_depois("resumo",      dados_exemplo)
+gerar_relatorio_depois("contagem",    dados_exemplo)
+gerar_relatorio_depois("chaves",      dados_exemplo)
+gerar_relatorio_depois("json_pretty", dados_exemplo)  # nova!
 
 
 # ==============================================================
