@@ -1,0 +1,12 @@
+{
+  "total_alunos": 4,
+  "media_geral": 8.38,
+  "aluno_maior_media": {
+    "nome": "Kaio Souza",
+    "media": 9.5
+  },
+  "aluno_menor_media": {
+    "nome": "Luciano dos Santos",
+    "media": 6.5
+  }
+}

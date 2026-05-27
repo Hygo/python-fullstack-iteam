@@ -1,0 +1,1 @@
+print("Hello word!\nÁlefe Alves da Costa\nPython: simples, poderoso e elegante.")

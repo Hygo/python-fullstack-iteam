@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "nome": "Álefe Alves",
+    "email": "alefe@aluno.com",
+    "idade": 21,
+    "notas": [
+      9.5,
+      8.0,
+      10.0
+    ],
+    "ativo": true
+  },
+  {
+    "id": 2,
+    "nome": "Amanda de Brito",
+    "email": "amanda@aluno.com",
+    "idade": 27,
+    "notas": [
+      7.5,
+      8.5,
+      9.0
+    ],
+    "ativo": true
+  },
+  {
+    "id": 3,
+    "nome": "Luciano dos Santos",
+    "email": "luciano@aluno.com",
+    "idade": 23,
+    "notas": [
+      6.0,
+      7.0,
+      6.5
+    ],
+    "ativo": true
+  },
+  {
+    "id": 4,
+    "nome": "Kaio Souza",
+    "email": "kaio@aluno.com",
+    "idade": 23,
+    "notas": [
+      10.0,
+      9.5,
+      9.0
+    ],
+    "ativo": true
+  }
+]
