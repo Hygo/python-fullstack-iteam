@@ -13,7 +13,7 @@ INSTRUÇÕES:
   2. Leia o enunciado completo no README.md antes de responder.
   3. Analise o código mentalmente — evite executar antes de decidir.
   4. Você pode adicionar comentários justificando sua escolha.
-  5. Suba este arquivo em: modulo-03_04/<seu_nome>/mod03-mod04.py
+  5. Suba este arquivo em: modulo-03_04/leticia-alves/template_leticia.py
 =============================================================
 """
 
