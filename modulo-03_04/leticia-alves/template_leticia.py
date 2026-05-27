@@ -5,7 +5,7 @@ Curso de Capacitação Full Stack – ITEAM
 Professor: Msc. Hygo Sousa De Oliveira
 
 Aluno(a): Letícia Alves dos Santos
-Data    : <DATA DE ENTREGA>
+Data    : 27/05/2026
 =============================================================
 
 INSTRUÇÕES:
