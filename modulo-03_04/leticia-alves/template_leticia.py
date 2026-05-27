@@ -35,7 +35,7 @@ INSTRUÇÕES:
 # D) "manga"
 # E) IndexError: list index out of range
 # ------------------------------------------------------------
-Q01 = 'B'
+Q01 = "B"
 ''' 
 
  Primeiro o índice 1 ("banana") é substituído por "abacaxi".
