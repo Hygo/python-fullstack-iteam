@@ -93,7 +93,7 @@ Escreva um script que exiba, em linhas separadas:
 
 > 💡 *Dica: use a função `print()` três vezes.*
 
----
+---     
 
 ### 🟢 Exercício 02 – Inspecionando o Ambiente
 Escreva um script que importe o módulo `sys` e exiba:
