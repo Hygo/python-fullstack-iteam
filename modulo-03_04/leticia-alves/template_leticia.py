@@ -1,21 +1,19 @@
-"""
-=============================================================
-AVALIAÇÃO — Módulos 03 e 04
-Curso de Capacitação Full Stack – ITEAM
-Professor: Msc. Hygo Sousa De Oliveira
-
-Aluno(a): Letícia Alves dos Santos
-Data    : <DATA DE ENTREGA>
-=============================================================
-
-INSTRUÇÕES:
-  1. Substitua cada "?" pela letra da sua resposta (A, B, C, D ou E).
-  2. Leia o enunciado completo no README.md antes de responder.
-  3. Analise o código mentalmente — evite executar antes de decidir.
-  4. Você pode adicionar comentários justificando sua escolha.
-  5. Suba este arquivo em: alunos/<seu_nome>/mod03-mod04.py
-=============================================================
-"""
+# =============================================================
+# AVALIAÇÃO — Módulos 03 e 04
+# Curso de Capacitação Full Stack – ITEAM
+# Professor: Msc. Hygo Sousa De Oliveira
+#
+# Aluno(a): Letícia Alves dos Santos
+# Data    : <DATA DE ENTREGA>
+# =============================================================
+#
+# INSTRUÇÕES:
+#   1. Substitua cada "?" pela letra da sua resposta (A, B, C, D ou E).
+#   2. Leia o enunciado completo no README.md antes de responder.
+#   3. Analise o código mentalmente — evite executar antes de decidir.
+#   4. Você pode adicionar comentários justificando sua escolha.
+#   5. Suba este arquivo em: alunos/<seu_nome>/mod03-mod04.py
+# =============================================================
 
 # ──────────────────────────────────────────────────────────────
 # MÓDULO 03 — ESTRUTURA DE DADOS (10 questões)
@@ -36,13 +34,9 @@ INSTRUÇÕES:
 # E) IndexError: list index out of range
 # ------------------------------------------------------------
 Q01 = 'B'
-''' 
-
- Primeiro o índice 1 ("banana") é substituído por "abacaxi".
- Depois "manga" é adicionada no final da lista.
- O índice -2 pega o penúltimo elemento, que é "laranja".
- 
-'''
+# Primeiro o índice 1 ("banana") é substituído por "abacaxi".
+# Depois "manga" é adicionada no final da lista.
+# O índice -2 pega o penúltimo elemento, que é "laranja".
    
 # ------------------------------------------------------------
 # Q02 🟢 — Tuplas: imutabilidade
@@ -58,10 +52,7 @@ Q01 = 'B'
 # E) (99, 20, 30) — índice 0 é substituído
 # ------------------------------------------------------------
 Q02 = "C"
-''' 
-Tuplas são imutáveis, então não é possível alterar  um valor usando índice.
-
-'''
+# Tuplas são imutáveis, então não é possível alterar um valor usando índice.
 
 
 
@@ -79,11 +70,8 @@ Tuplas são imutáveis, então não é possível alterar  um valor usando índic
 # E) "Ana"
 # ------------------------------------------------------------
 Q03 = "C"
-'''
 # A chave "email" não existe no dicionário.
 # O método .get() retorna o valor padrão informado.
-
-'''
 
 # ------------------------------------------------------------
 # Q04 🟢 — Conjuntos: eliminação de duplicatas
@@ -99,10 +87,8 @@ Q03 = "C"
 # E) 6
 # ------------------------------------------------------------
 Q04 = "D"
-'''
 # set() remove os valores duplicados.
 # Sobram 7 números únicos.
-'''
 
 
 # ------------------------------------------------------------
@@ -119,11 +105,8 @@ Q04 = "D"
 # E) [9.0, 7.0]
 # ------------------------------------------------------------
 Q05 = "B"
-'''
- A lista é ordenada do maior para o menor, 
- o slicing [1:3] pega 8.5 e 7.0.
-
-'''
+# A lista é ordenada do maior para o menor,
+# o slicing [1:3] pega 8.5 e 7.0.
 
 # ------------------------------------------------------------
 # Q06 🟡 — Dicionários: list comprehension com .items()
@@ -139,10 +122,7 @@ Q05 = "B"
 # E) []
 # ------------------------------------------------------------
 Q06 = "C"
-'''
- Apenas "borracha" possui quantidade 0
-
-'''
+# Apenas "borracha" possui quantidade 0
 
 
 # ------------------------------------------------------------
@@ -160,11 +140,8 @@ Q06 = "C"
 # E) 8
 # ------------------------------------------------------------
 Q07 = "A"
-'''
-difference() retorna quem existe apenas na turma_a,
-sobram Ana e Bruno.
-
-'''
+# difference() retorna quem existe apenas na turma_a,
+# sobram Ana e Bruno.
 
 
 # ------------------------------------------------------------
@@ -181,10 +158,8 @@ sobram Ana e Bruno.
 # E) [1, 9, 25, 49, 81]
 # ------------------------------------------------------------
 Q08 = "B"
-'''
-O comprehension pega apenas números pares
-e eleva cada um ao quadrado.
-'''
+# O comprehension pega apenas números pares
+# e eleva cada um ao quadrado.
 
 
 # ------------------------------------------------------------
@@ -210,9 +185,7 @@ e eleva cada um ao quadrado.
 # E) {"backend": 5, "frontend": 3}
 # ------------------------------------------------------------
 Q09 = "D"
-'''
-O sum() soma os membros das equipes.
-'''
+# O sum() soma os membros das equipes.
 
 # ------------------------------------------------------------
 # Q10 🔴 — Estruturas combinadas: lista de dicts + comprehension
@@ -236,10 +209,7 @@ O sum() soma os membros das equipes.
 # E) []
 # ------------------------------------------------------------
 Q10 = "C"
-'''
-Carlos e Beatriz possuem média maior ou igual a 7
-
-'''
+# Carlos e Beatriz possuem média maior ou igual a 7
 
 
 # ──────────────────────────────────────────────────────────────
