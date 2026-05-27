@@ -29,7 +29,7 @@ from salao.modelos.funcionario import Funcionario
 
 
 # BUG 7 ↓  não herda de ABC
-class Equipe:          # ← ERRADO: deveria ser  class Equipe(ABC):
+class Equipe(ABC):          # ← ERRADO: deveria ser  class Equipe(ABC):
     """
     Interface base para todas as equipes do salão.
     Define o contrato que TODA equipe deve cumprir.
@@ -61,6 +61,7 @@ class Equipe:          # ← ERRADO: deveria ser  class Equipe(ABC):
         pass
 
     # BUG 8: falta @abstractmethod aqui ↓
+    @abstractmethod
     def realizar_servico(self, cliente: str, servico: str):  # ← ERRADO: falta @abstractmethod acima
         """Registra a realização de um serviço."""
         raise NotImplementedError("Subclasses devem implementar realizar_servico().")
