@@ -1,0 +1,16 @@
+[
+    {
+        "aluno": "Álefe alves",
+        "nota1": 0.2,
+        "nota2": 0.05,
+        "nota3": 10.0,
+        "media": 3.42
+    },
+    {
+        "aluno": "Luciano dos Santos Nascimento",
+        "nota1": 10.0,
+        "nota2": 10.0,
+        "nota3": 10.0,
+        "media": 10.0
+    }
+]
