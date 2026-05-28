@@ -4,67 +4,30 @@
 # ============================================================
 
 
-def validar_turma(nome_turma):
+def checar_sair(valor: str) -> bool:
+    """Retorna True se o usuário digitou 'sair' (independente de maiúsculas/minúsculas)."""
+    return valor.strip().lower() == 'sair'
+
+def validar_turma(nome_turma: str) -> bool:
+    """Valida se o nome da turma não é vazio."""
+    return bool(nome_turma.strip())
+
+def validar_aluno(nome_aluno: str) -> bool:
+    """Valida se o aluno tem pelo menos nome e sobrenome (2 palavras)."""
+    palavras = nome_aluno.strip().split()
+    return len(palavras) >= 2
+
+def validar_nota(nota_str: str) -> float | None:
     """
-    Valida o nome da turma informado pelo usuário.
-
-    Regras:
-        - Não pode ser uma string vazia ou só espaços
-        - Não pode ser igual a "sair" (palavra reservada para encerrar)
-
-    Parâmetros:
-        nome_turma (str): valor digitado pelo usuário
-
-    Retorno:
-        bool: True se válido, False caso contrário
+    Substitui vírgula por ponto, tenta converter para float e 
+    valida se está entre 0.0 e 10.0. Retorna o float se válido, ou None se inválido.
     """
-    # TODO: Verifique se nome_turma, após remover espaços com .strip(),
-    #       está vazia OU é igual à palavra "sair" (case-insensitive).
-    #       Se qualquer uma das condições for verdadeira, retorne False.
-    #       Caso contrário, retorne True.
-    pass  # ← apague esta linha e escreva seu código aqui
-
-
-def validar_aluno(nome_aluno):
-    """
-    Valida o nome do aluno informado pelo usuário.
-
-    Regras:
-        - Não pode ser uma string vazia ou só espaços
-        - Não pode ser igual a "sair"
-        - Deve conter ao menos duas palavras (nome e sobrenome)
-
-    Parâmetros:
-        nome_aluno (str): valor digitado pelo usuário
-
-    Retorno:
-        bool: True se válido, False caso contrário
-    """
-    # TODO: Remova espaços extras com .strip().
-    #       Verifique se está vazia ou é igual a "sair".
-    #       Use .split() para separar as palavras e confirme
-    #       que o aluno informou ao menos 2 palavras.
-    #       Retorne True apenas se todas as condições passarem.
-    pass  # ← apague esta linha e escreva seu código aqui
-
-
-def validar_nota(valor_digitado):
-    """
-    Valida e converte uma nota digitada pelo usuário.
-
-    Regras:
-        - Deve ser um número (aceita ponto ou vírgula como decimal)
-        - Deve estar entre 0.0 e 10.0 (inclusive)
-
-    Parâmetros:
-        valor_digitado (str): string digitada pelo usuário
-
-    Retorno:
-        float ou None: o valor convertido se válido, ou None se inválido
-    """
-    # TODO: Substitua vírgula por ponto para aceitar "7,5" como "7.5".
-    #       Tente converter para float dentro de um bloco try/except.
-    #       Se a conversão falhar (ValueError), retorne None.
-    #       Se o número estiver fora do intervalo [0.0, 10.0], retorne None.
-    #       Se tudo estiver correto, retorne o float convertido.
-    pass  # ← apague esta linha e escreva seu código aqui
+    try:
+        # Trata o uso de vírgula como separador decimal
+        nota_limpa = nota_str.replace(',', '.')
+        nota_float = float(nota_limpa)
+        if 0.0 <= nota_float <= 10.0:
+            return nota_float
+        return None
+    except ValueError:
+        return None
