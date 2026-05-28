@@ -1,19 +1,21 @@
-# =============================================================
-# AVALIAÇÃO — Módulos 03 e 04
-# Curso de Capacitação Full Stack – ITEAM
-# Professor: Msc. Hygo Sousa De Oliveira
-#
-# Aluno(a): Letícia Alves dos Santos
-# Data    : <DATA DE ENTREGA>
-# =============================================================
-#
-# INSTRUÇÕES:
-#   1. Substitua cada "?" pela letra da sua resposta (A, B, C, D ou E).
-#   2. Leia o enunciado completo no README.md antes de responder.
-#   3. Analise o código mentalmente — evite executar antes de decidir.
-#   4. Você pode adicionar comentários justificando sua escolha.
-#   5. Suba este arquivo em: alunos/<seu_nome>/mod03-mod04.py
-# =============================================================
+"""
+=============================================================
+AVALIAÇÃO — Módulos 03 e 04
+Curso de Capacitação Full Stack – ITEAM
+Professor: Msc. Hygo Sousa De Oliveira
+
+Aluno(a): Letícia Alves dos Santos
+Data    : <DATA DE ENTREGA>
+=============================================================
+
+INSTRUÇÕES:
+  1. Substitua cada "?" pela letra da sua resposta (A, B, C, D ou E).
+  2. Leia o enunciado completo no README.md antes de responder.
+  3. Analise o código mentalmente — evite executar antes de decidir.
+  4. Você pode adicionar comentários justificando sua escolha.
+  5. Suba este arquivo em: alunos/<seu_nome>/mod03-mod04.py
+=============================================================
+"""
 
 # ──────────────────────────────────────────────────────────────
 # MÓDULO 03 — ESTRUTURA DE DADOS (10 questões)
@@ -34,9 +36,13 @@
 # E) IndexError: list index out of range
 # ------------------------------------------------------------
 Q01 = 'B'
-# Primeiro o índice 1 ("banana") é substituído por "abacaxi".
-# Depois "manga" é adicionada no final da lista.
-# O índice -2 pega o penúltimo elemento, que é "laranja".
+''' 
+
+ Primeiro o índice 1 ("banana") é substituído por "abacaxi".
+ Depois "manga" é adicionada no final da lista.
+ O índice -2 pega o penúltimo elemento, que é "laranja".
+ 
+'''
    
 # ------------------------------------------------------------
 # Q02 🟢 — Tuplas: imutabilidade
