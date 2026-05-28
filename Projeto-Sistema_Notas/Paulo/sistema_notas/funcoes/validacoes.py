@@ -18,11 +18,12 @@ def validar_turma(nome_turma):
     Retorno:
         bool: True se válido, False caso contrário
     """
-    # TODO: Verifique se nome_turma, após remover espaços com .strip(),
-    #       está vazia OU é igual à palavra "sair" (case-insensitive).
-    #       Se qualquer uma das condições for verdadeira, retorne False.
-    #       Caso contrário, retorne True.
-    pass  # ← apague esta linha e escreva seu código aqui
+    # Remove espaços em branco
+    nome_limpo = nome_turma.strip()
+    # Verifica se está vazio ou igual a "sair"
+    if not nome_limpo or nome_limpo.lower() == "sair":
+        return False
+    return True
 
 
 def validar_aluno(nome_aluno):
@@ -40,12 +41,15 @@ def validar_aluno(nome_aluno):
     Retorno:
         bool: True se válido, False caso contrário
     """
-    # TODO: Remova espaços extras com .strip().
-    #       Verifique se está vazia ou é igual a "sair".
-    #       Use .split() para separar as palavras e confirme
-    #       que o aluno informou ao menos 2 palavras.
-    #       Retorne True apenas se todas as condições passarem.
-    pass  # ← apague esta linha e escreva seu código aqui
+    # Remove espaços em branco
+    nome_limpo = nome_aluno.strip()
+    # Verifica se está vazio ou igual a "sair"
+    if not nome_limpo or nome_limpo.lower() == "sair":
+        return False
+    # Verifica se possui ao menos duas palavras
+    if len(nome_limpo.split()) < 2:
+        return False
+    return True
 
 
 def validar_nota(valor_digitado):
@@ -62,9 +66,13 @@ def validar_nota(valor_digitado):
     Retorno:
         float ou None: o valor convertido se válido, ou None se inválido
     """
-    # TODO: Substitua vírgula por ponto para aceitar "7,5" como "7.5".
-    #       Tente converter para float dentro de um bloco try/except.
-    #       Se a conversão falhar (ValueError), retorne None.
-    #       Se o número estiver fora do intervalo [0.0, 10.0], retorne None.
-    #       Se tudo estiver correto, retorne o float convertido.
-    pass  # ← apague esta linha e escreva seu código aqui
+    try:
+        # Troca vírgula por ponto
+        valor_limpo = str(valor_digitado).replace(",", ".")
+        nota = float(valor_limpo)
+        # Confere se a nota está no intervalo [0.0, 10.0]
+        if 0.0 <= nota <= 10.0:
+            return nota
+        return None
+    except ValueError:
+        return None
