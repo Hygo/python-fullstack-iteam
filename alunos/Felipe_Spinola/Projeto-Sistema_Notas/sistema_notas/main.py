@@ -11,6 +11,7 @@
 from funcoes.validacoes import validar_turma, validar_aluno, validar_nota
 from funcoes.arquivo import salvar_nota, ler_notas
 
+# Por último, integre tudo. As funções auxiliares `obter_turma()`, `obter_aluno()` e `obter_nota()` fazem loops de entrada com validação. A função `main()` orquestra o programa inteiro.
 
 def obter_turma():
     """
@@ -25,8 +26,14 @@ def obter_turma():
     #       - Se o valor digitado for "sair" (após .strip().lower()), retorne None.
     #       - Se validar_turma() retornar True, retorne o nome da turma.
     #       - Caso contrário, imprima uma mensagem de erro e repita o loop.
-    pass  # ← apague esta linha e escreva seu código aqui
 
+    while True:
+     turma = input("Digite o nome da turma (ou 'sair' para encerrar): ").strip()
+     if turma.lower() == "sair":
+        return None
+     if validar_turma(turma):
+        return turma
+     print("Nome de turma inválido. Tente novamente.") 
 
 def obter_aluno():
     """
