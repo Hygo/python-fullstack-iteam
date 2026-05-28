@@ -58,9 +58,9 @@ class Funcionario:
             salario_base (float): Salário base mensal.
         """
         # TODO: Atribua os parâmetros aos atributos de instância
-        self.nome = None
-        self.cpf = None
-        self.salario_base = None
+        self.nome = nome
+        self.cpf = cpf
+        self.salario_base = salario_base
 
     def calcular_salario(self):
         """
@@ -70,8 +70,8 @@ class Funcionario:
         Returns:
             float: Salário calculado.
         """
-        # TODO: Retorne o salario_base
-        pass
+        # TODO: Retorne o salario_base 
+        return self.salario_base
 
     def exibir_info(self):
         """
@@ -86,7 +86,13 @@ class Funcionario:
         # Salário Final: R$ [calcular_salario()]
         #
         # Dica: use type(self).__name__ para obter o nome real da classe do objeto
-        pass
+        
+        salario_final = self.calcular_salario()
+        print(f"[Tipo: {type(self).__name__}]")
+        print(f"Nome:         {self.nome}")
+        print(f"CPF:          {self.cpf}")
+        print(f"Salário Base: R$ {self.salario_base:.2f}")
+        print(f"Salário Final: R$ {salario_final:.2f}")
 
     def __str__(self):
         """Representação em string do funcionário."""
@@ -120,10 +126,12 @@ class Gerente(Funcionario):
         """
         # TODO: Use super().__init__() para inicializar os atributos da classe pai
         # (nome, cpf, salario_base)
+        super().__init__(nome, cpf, salario_base)
+        
 
         # TODO: Atribua os novos atributos específicos do Gerente
-        self.departamento = None
-        self.bonus_percentual = None
+        self.departamento = departamento
+        self.bonus_percentual = bonus_percentual
 
     def calcular_salario(self):
         """
@@ -136,7 +144,10 @@ class Gerente(Funcionario):
         """
         # TODO: Calcule o bônus e retorne a soma com o salário base.
         # Dica: você pode usar super().calcular_salario() para obter o salário base.
-        pass
+        
+        salario_base = super().calcular_salario()
+        bonus = salario_base * self.bonus_percentual
+        return salario_base + bonus
 
     def exibir_info(self):
         """
@@ -146,8 +157,9 @@ class Gerente(Funcionario):
         # depois adicione as informações específicas do Gerente:
         #   Departamento: [departamento]
         #   Bônus:        R$ [valor do bônus]
-        pass
-
+        super().exibir_info()
+        print(f"Departamento: {self.departamento}")
+        print(f"Bônus:        R$ {self.calcular_salario() - self.salario_base:.2f}")
 
 # -----------------------------------------------------------------------------
 # CLASSE FILHA 2: Estagiario
@@ -178,8 +190,13 @@ class Estagiario(Funcionario):
 
         # TODO: Atribua os atributos específicos.
         # Se a carga_horaria for maior que 30, defina como 30 e avise o usuário.
-        self.curso = None
-        self.carga_horaria = None
+        super().__init__(nome, cpf, salario_base)
+        self.curso = curso
+        if carga_horaria > 30:
+            print("A carga horária informada é maior que 30h. Será utilizada a carga horária máxima de 30h.")
+            self.carga_horaria = 30
+        else:
+            self.carga_horaria = carga_horaria
 
     def calcular_salario(self):
         """
@@ -190,7 +207,7 @@ class Estagiario(Funcionario):
             float: Bolsa proporcional.
         """
         # TODO: Calcule e retorne a bolsa proporcional
-        pass
+        return (self.carga_horaria / 30) * self.salario_base
 
     def exibir_info(self):
         """
@@ -199,7 +216,9 @@ class Estagiario(Funcionario):
         # TODO: Chame super().exibir_info() e adicione:
         #   Curso:          [curso]
         #   Carga Horária:  [carga_horaria]h/semana
-        pass
+        super().exibir_info()
+        print(f"Curso:          {self.curso}")
+        print(f"Carga Horária:  {self.carga_horaria}h/semana")
 
 
 # =============================================================================
@@ -214,14 +233,20 @@ if __name__ == "__main__":
 
     # TODO: Instancie um objeto Funcionario genérico e chame exibir_info()
     # func = Funcionario("João Silva", "111.222.333-44", 3000.00)
+    func = Funcionario("João Silva", "111.222.333-44", 3000.00)
+    func.exibir_info()
 
     print("\n" + "-" * 55)
 
     # TODO: Instancie um Gerente com 20% de bônus e exiba as informações
+    gerente = Gerente("Maria Souza", "222.333.444-55", 5000.00, "Vendas", 0.20)
+    gerente.exibir_info()
 
     print("\n" + "-" * 55)
 
     # TODO: Instancie um Estagiario com 25h semanais e exiba as informações
+    estagiario = Estagiario("Carlos Oliveira", "333.444.555-66", 1500.00, "Engenharia de Software", 25)
+    estagiario.exibir_info()
 
     print("\n" + "-" * 55)
 
@@ -231,5 +256,6 @@ if __name__ == "__main__":
     # funcionarios = [func, gerente, estagiario]
     # for f in funcionarios:
     #     f.exibir_info()
+    
 
     print("\nExercício concluído!")

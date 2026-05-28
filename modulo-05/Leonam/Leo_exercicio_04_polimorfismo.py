@@ -51,7 +51,7 @@ class CanalNotificacao:
             remetente (str): Nome ou identificador do remetente.
         """
         # TODO: Atribua o remetente ao atributo de instância
-        self.remetente = None
+        self.remetente = remetente
 
     def enviar(self, destinatario, mensagem):
         """
@@ -103,8 +103,12 @@ class NotificacaoEmail(CanalNotificacao):
             assunto_padrao (str): Assunto padrão dos e-mails.
         """
         # TODO: Chame super().__init__() com o remetente
+        
+        super().__init__(remetente)
+        
         # TODO: Atribua o assunto_padrao
-        self.assunto_padrao = None
+        
+        self.assunto_padrao = assunto_padrao
 
     def enviar(self, destinatario, mensagem):
         """
@@ -123,7 +127,12 @@ class NotificacaoEmail(CanalNotificacao):
         #    Corpo:   [mensagem]
         #
         # TODO: Após imprimir, use self.formatar_log() e imprima o log com status "ENVIADO"
-        pass
+        print(f"📧 [E-MAIL]")
+        print(f"    De:      {self.remetente}")
+        print(f"    Para:    {destinatario}")
+        print(f"    Assunto: {self.assunto_padrao}")
+        print(f"    Corpo:   {mensagem}")
+        print(self.formatar_log(destinatario, "ENVIADO"))
 
 
 # -----------------------------------------------------------------------------
@@ -145,7 +154,8 @@ class NotificacaoSMS(CanalNotificacao):
             limite_chars (int): Limite de caracteres (padrão 160).
         """
         # TODO: Chame super().__init__() e atribua limite_chars
-        self.limite_chars = None
+        self.limite_chars = limite_chars
+        super().__init__(remetente)
 
     def enviar(self, destinatario, mensagem):
         """
@@ -168,7 +178,17 @@ class NotificacaoSMS(CanalNotificacao):
         #    Caracteres: [len(mensagem)] / [limite_chars]
         #
         # TODO: Imprima o log de envio
-        pass
+        if len(mensagem) > self.limite_chars:
+            mensagem_truncada = mensagem[:self.limite_chars]
+            print("Aviso: A mensagem foi truncada para atender ao limite de caracteres.")
+        else:
+            mensagem_truncada = mensagem
+        print(f"📱 [SMS]")
+        print(f"    De:         {self.remetente}")
+        print(f"    Para:       {destinatario}")
+        print(f"    Mensagem:   {mensagem_truncada}")
+        print(f"    Caracteres: {len(mensagem)} / {self.limite_chars}")
+        print(self.formatar_log(destinatario, "ENVIADO"))
 
 
 # -----------------------------------------------------------------------------
@@ -192,8 +212,9 @@ class NotificacaoPush(CanalNotificacao):
             icone (str): Ícone da notificação.
         """
         # TODO: Chame super().__init__() e atribua nome_app e icone
-        self.nome_app = None
-        self.icone = None
+        self.nome_app = nome_app
+        self.icone = icone
+        super().__init__(remetente)
 
     def enviar(self, destinatario, mensagem):
         """
@@ -211,7 +232,11 @@ class NotificacaoPush(CanalNotificacao):
         #    Notificação: [mensagem]
         #
         # TODO: Imprima o log de envio
-        pass
+        print(f" [PUSH - {self.nome_app}]")
+        print(f"    Ícone:       {self.icone}")
+        print(f"    Destino:     {destinatario}")
+        print(f"    Notificação: {mensagem}")
+        print(self.formatar_log(destinatario, "ENVIADO"))
 
 
 # -----------------------------------------------------------------------------
@@ -231,8 +256,8 @@ def disparar_notificacao(canal, destinatario, mensagem):
     # TODO: Imprima um separador visual e chame canal.enviar(destinatario, mensagem)
     print("\n" + "=" * 50)
     # Chame o método enviar() do canal recebido
-    pass
-
+    
+    canal.enviar(destinatario, mensagem)
 
 # =============================================================================
 # BLOCO DE TESTES
@@ -248,8 +273,14 @@ if __name__ == "__main__":
     # email = NotificacaoEmail("sistema@iteam.com", "Atualização do Sistema")
     # sms   = NotificacaoSMS("+55 92 99999-0000")
     # push  = NotificacaoPush("servidor-01", "ITEAM App", "🎓")
+    email = NotificacaoEmail("sistema@iteam.com", "Atualização do Sistema")
+    sms = NotificacaoSMS("+55 92 99999-0000")
+    push = NotificacaoPush("servidor-01", "ITEAM App", "🎓")
 
     # TODO: Use a função disparar_notificacao() para enviar mensagens por cada canal
+    disparar_notificacao(email, "leonam@email.com", "Sua aula começa em 30 minutos!")
+    disparar_notificacao(sms, "Raquel@email.com", "Sua aula começa em 30 minutos!")
+    disparar_notificacao(push, "Julia@email.com", "Sua aula começa em 30 minutos!")
 
     # TODO (DESAFIO DUCK TYPING): Crie uma lista com os diferentes canais e
     # percorra-a chamando disparar_notificacao() para cada um com a mesma mensagem.
@@ -258,8 +289,14 @@ if __name__ == "__main__":
     # canais = [email, sms, push]
     # for canal in canais:
     #     disparar_notificacao(canal, "aluno@email.com", "Sua aula começa em 30 minutos!")
+    canais = [email, sms, push]
+    for canal in canais:
+        disparar_notificacao(canal, "Leonam@email.com", "Sua aula começa em 30 minutos!")
+    
 
     # TODO (DESAFIO EXTRA): Teste enviar um SMS com uma mensagem muito longa
     # (mais de 160 caracteres) e observe o truncamento.
+    mensagem_longa = "Esta é uma mensagem de teste para verificar o comportamento do sistema de notificações quando o texto ultrapassa o limite de caracteres permitido para SMS. O sistema deve truncar a mensagem e avisar o usuário sobre isso."
+    disparar_notificacao(sms, "Leonam@email.com", mensagem_longa)
 
     print("\nExercício concluído!")

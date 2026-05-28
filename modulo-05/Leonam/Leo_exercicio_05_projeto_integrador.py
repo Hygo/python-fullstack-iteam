@@ -60,22 +60,22 @@ class ItemBiblioteca:
         """
         # TODO: Atribua codigo a __codigo (privado), titulo e ano_publicacao normalmente
         # O item começa disponível por padrão: self.__disponivel = True
-        self.__codigo = None
-        self.titulo = None
-        self.ano_publicacao = None
+        self.__codigo = codigo
+        self.titulo = titulo
+        self.ano_publicacao = ano_publicacao
         self.__disponivel = True
 
     @property
     def codigo(self):
         """Retorna o código do item (somente leitura)."""
         # TODO: Retorne __codigo
-        pass
+        return self.__codigo
 
     @property
     def disponivel(self):
         """Retorna True se o item está disponível para empréstimo."""
         # TODO: Retorne __disponivel
-        pass
+        return self.__disponivel
 
     def emprestar(self):
         """
@@ -86,7 +86,11 @@ class ItemBiblioteca:
         """
         # TODO: Se __disponivel for True, mude para False e retorne True.
         # Se já estiver False, retorne False (item já emprestado).
-        pass
+        if self.__disponivel:
+            self.__disponivel = False
+            return True
+        else:
+            return False
 
     def devolver(self):
         """
@@ -97,7 +101,11 @@ class ItemBiblioteca:
         """
         # TODO: Se __disponivel for False, mude para True e retorne True.
         # Se já estiver True, retorne False (item não estava emprestado).
-        pass
+        if not self.__disponivel:
+            self.__disponivel = True
+            return True
+        else:
+            return False
 
     def info_completa(self):
         """
@@ -114,7 +122,7 @@ class ItemBiblioteca:
     def __eq__(self, outro):
         """Dois itens são iguais se possuem o mesmo código."""
         # TODO: Compare self.codigo com outro.codigo
-        pass
+        return self.codigo == outro.codigo
 
 
 # -----------------------------------------------------------------------------
@@ -134,9 +142,10 @@ class Livro(ItemBiblioteca):
     def __init__(self, codigo, titulo, ano_publicacao, autor, isbn, num_paginas):
         # TODO: Chame super().__init__() com os parâmetros da classe pai
         # TODO: Atribua os atributos específicos do Livro
-        self.autor = None
-        self.isbn = None
-        self.num_paginas = None
+        super().__init__(codigo, titulo, ano_publicacao)
+        self.autor = autor
+        self.isbn = isbn
+        self.num_paginas = num_paginas
 
     def info_completa(self):
         """
@@ -213,7 +222,16 @@ class Pessoa:
         # Se ambas forem True: chame item.emprestar(), adicione item a _emprestimos_ativos,
         # imprima mensagem de sucesso e retorne True.
         # Caso contrário: informe o motivo da falha e retorne False.
-        pass
+        if not self.pode_emprestar():
+            print(f"{self.nome} atingiu o limite de empréstimos ({self.limite_emprestimos}).")
+            return False
+        if not item.disponivel:
+            print(f"O item '{item.titulo}' não está disponível para empréstimo.")
+            return False
+        item.emprestar()
+        self._emprestimos_ativos.append(item)
+        print(f"{self.nome} emprestou '{item.titulo}' com sucesso!")
+        return True
 
     def registrar_devolucao(self, item):
         """
@@ -228,13 +246,24 @@ class Pessoa:
         # TODO: Verifique se 'item' está em self._emprestimos_ativos (use 'in' e __eq__)
         # Se estiver: chame item.devolver(), remova da lista e retorne True.
         # Se não estiver: informe que o item não estava registrado para este membro.
-        pass
+        if item in self._emprestimos_ativos:
+            item.devolver()
+            self._emprestimos_ativos.remove(item)
+            print(f"{self.nome} devolveu '{item.titulo}' com sucesso!")
+            return True
+        print(f"O item '{item.titulo}' não estava registrado para {self.nome}.")
+        return False
 
     def listar_emprestimos(self):
         """Exibe todos os itens atualmente emprestados pelo membro."""
         # TODO: Se _emprestimos_ativos estiver vazio, informe que não há empréstimos.
         # Caso contrário, liste cada item usando __str__ (basta usar print(item)).
-        pass
+        if not self._emprestimos_ativos:
+            print(f"{self.nome} não tem empréstimos ativos.")
+        else:
+            print(f"Empréstimos de {self.nome}:")
+            for item in self._emprestimos_ativos:
+                print(f"  - {item}")
 
     def __str__(self):
         tipo = type(self).__name__
@@ -246,12 +275,12 @@ class AlunoMembro(Pessoa):
 
     def __init__(self, nome, cpf, matricula):
         # TODO: Chame super().__init__() e atribua matricula
-        self.matricula = None
+        self.matricula = matricula
 
     @property
     def limite_emprestimos(self):
         # TODO: Retorne 3
-        pass
+        return 3
 
 
 class ProfessorMembro(Pessoa):
@@ -259,12 +288,12 @@ class ProfessorMembro(Pessoa):
 
     def __init__(self, nome, cpf, disciplina):
         # TODO: Chame super().__init__() e atribua disciplina
-        self.disciplina = None
+        self.disciplina = disciplina
 
     @property
     def limite_emprestimos(self):
         # TODO: Retorne 5
-        pass
+        return 5
 
 
 # =============================================================================
@@ -294,12 +323,18 @@ class Biblioteca:
         # TODO: Verifique se o item já não está no acervo (use 'in' — funciona com __eq__).
         # Se não estiver: adicione a __acervo e confirme.
         # Se já estiver: informe que o item já existe.
-        pass
+        
+        if item not in self.__acervo:
+            self.__acervo.append(item)
+            print(f"Item adicionado ao acervo: {item}")
+        else:
+            print(f"O item '{item.titulo}' já existe no acervo.")
 
     def cadastrar_membro(self, pessoa):
         """Cadastra um membro na biblioteca."""
         # TODO: Adicione o membro à lista __membros e confirme o cadastro.
-        pass
+        self.__membros.append(pessoa)
+        print(f"Membro cadastrado: {pessoa}")
 
     def buscar_item_por_codigo(self, codigo):
         """
@@ -310,7 +345,10 @@ class Biblioteca:
         """
         # TODO: Percorra __acervo e retorne o item cujo .codigo == codigo.
         # Se não encontrar, retorne None.
-        pass
+        for item in self.__acervo:
+            if item.codigo == codigo:
+                return item
+        return None
 
     def realizar_emprestimo(self, membro, codigo_item):
         """
@@ -323,12 +361,20 @@ class Biblioteca:
         # TODO: Use buscar_item_por_codigo() para encontrar o item.
         # Se não encontrar: informe "item não encontrado".
         # Se encontrar: chame membro.registrar_emprestimo(item).
-        pass
+        item = self.buscar_item_por_codigo(codigo_item)
+        if not item:
+            print("Item não encontrado.")
+        else:
+            membro.registrar_emprestimo(item)
 
     def realizar_devolucao(self, membro, codigo_item):
         """Registra a devolução de um item."""
         # TODO: Use buscar_item_por_codigo() e depois membro.registrar_devolucao(item).
-        pass
+        item = self.buscar_item_por_codigo(codigo_item)
+        if not item:
+            print("Item não encontrado.")
+        else:
+            membro.registrar_devolucao(item)
 
     def exibir_acervo(self):
         """Exibe todos os itens do acervo com seu status."""
@@ -364,53 +410,53 @@ if __name__ == "__main__":
     print("=" * 55)
 
     # --- PASSO 1: Crie a biblioteca ---
-    # biblioteca = Biblioteca("Biblioteca ITEAM")
+    biblioteca = Biblioteca("Biblioteca ITEAM")
 
     # --- PASSO 2: Crie itens do acervo ---
-    # livro1  = Livro("L001", "Python para Principiantes", 2012,
-    #                 "Eugenia Bahit", "978-0000000001", 220)
-    # livro2  = Livro("L002", "A Beginner's Guide to Python 3", 2020,
-    #                 "John Hunt", "978-0000000002", 450)
-    # revista = Revista("R001", "Python Magazine", 2024,
-    #                   "Tech Press", 42, "Mensal")
+    livro1  = Livro("L001", "Python para Principiantes", 2012,
+                    "Eugenia Bahit", "978-0000000001", 220)
+    livro2  = Livro("L002", "A Beginner's Guide to Python 3", 2020,
+                    "John Hunt", "978-0000000002", 450)
+    revista = Revista("R001", "Python Magazine", 2024,
+                       "Tech Press", 42, "Mensal")
 
     # --- PASSO 3: Adicione os itens ao acervo ---
-    # biblioteca.adicionar_item(livro1)
-    # biblioteca.adicionar_item(livro2)
-    # biblioteca.adicionar_item(revista)
+    biblioteca.adicionar_item(livro1)
+    biblioteca.adicionar_item(livro2)
+    biblioteca.adicionar_item(revista)
 
-    # --- PASSO 4: Cadastre membros ---
-    # aluno    = AlunoMembro("Ana Lima", "111.222.333-44", "2024001")
-    # professor = ProfessorMembro("Prof. Carlos", "555.666.777-88", "Programação")
-    # biblioteca.cadastrar_membro(aluno)
-    # biblioteca.cadastrar_membro(professor)
+    #--- PASSO 4: Cadastre membros ---
+    aluno    = AlunoMembro("Ana Lima", "111.222.333-44", "2024001")
+    professor = ProfessorMembro("Prof. Carlos", "555.666.777-88", "Programação")
+    biblioteca.cadastrar_membro(aluno)
+    biblioteca.cadastrar_membro(professor)
 
     # --- PASSO 5: Exiba o acervo e os membros ---
-    # biblioteca.exibir_acervo()
-    # biblioteca.exibir_membros()
+    biblioteca.exibir_acervo()
+    biblioteca.exibir_membros()
 
     # --- PASSO 6: Realize empréstimos ---
-    # biblioteca.realizar_emprestimo(aluno, "L001")
-    # biblioteca.realizar_emprestimo(professor, "R001")
+    biblioteca.realizar_emprestimo(aluno, "L001")
+    biblioteca.realizar_emprestimo(professor, "R001")
 
     # --- PASSO 7: Exiba o acervo novamente (veja as mudanças de status) ---
-    # biblioteca.exibir_acervo()
+    biblioteca.exibir_acervo()
 
     # --- PASSO 8: Liste os empréstimos dos membros ---
-    # print("\n📋 Empréstimos da Ana:")
-    # aluno.listar_emprestimos()
+    print("\n📋 Empréstimos da Ana:")
+    aluno.listar_emprestimos()
 
     # --- PASSO 9: Realize uma devolução ---
-    # biblioteca.realizar_devolucao(aluno, "L001")
-    # biblioteca.exibir_acervo()
+    biblioteca.realizar_devolucao(aluno, "L001")
+    biblioteca.exibir_acervo()
 
     # --- PASSO 10: Polimorfismo - chame info_completa() para Livro e Revista ---
     # livro1.info_completa()
-    # revista.info_completa()
+    revista.info_completa()
 
     # TODO (DESAFIO): Tente emprestar mais itens do que o limite do Aluno (3)
     # e observe o comportamento do sistema.
-
+    
     # TODO (DESAFIO): Tente adicionar o mesmo livro duas vezes ao acervo.
 
     print("\nExercício concluído!")

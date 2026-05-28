@@ -1,0 +1,23 @@
+[
+    {
+        "aluno": "Leonam De Sousa",
+        "nota1": 10.0,
+        "nota2": 10.0,
+        "nota3": 10.0,
+        "media": 10.0
+    },
+    {
+        "aluno": "Raquel Sofia Do Carmo",
+        "nota1": 10.0,
+        "nota2": 9.0,
+        "nota3": 8.0,
+        "media": 9.0
+    },
+    {
+        "aluno": "Leonam De Sousa",
+        "nota1": 10.0,
+        "nota2": 4.0,
+        "nota3": 7.0,
+        "media": 7.0
+    }
+]
