@@ -56,7 +56,7 @@ def obter_nota(numero_da_nota):
     #       - Se retornar None (inválido), exiba uma mensagem de erro.
     #       - Se retornar um float válido, retorne-o.
     pass  # ← apague esta linha e escreva seu código aqui
-
+               
 
 def main():
     """

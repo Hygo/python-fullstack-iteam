@@ -54,7 +54,24 @@ def salvar_nota(turma, aluno, nota1, nota2, nota3):
     # TODO (Passo 6): Abra o arquivo para escrita com open() e salve
     #                 com json.dump(). Use indent=4 para formatar.
 
-    pass  # ← apague esta linha e escreva seu código aqui
+    media = round((nota1 + nota2 + nota3) / 3, 2)
+    
+    {
+        "aluno": aluno,
+        "nota1": nota1, "nota2": nota2, "nota3": nota3, "media": media
+    }
+ 
+    nome_arquivo = turma.replace(" ", "_") + ".json"
+    caminho = os.path.join("notas", nome_arquivo)
+    
+if os.path.exists(caminho):
+        with open(caminho, "r", encoding="utf-8") as f:
+            dados = json.load(f)
+else:
+        os.makedirs("notas", exist_ok=True)
+        dados = []
+
+
 
 
 def ler_notas(turma):
