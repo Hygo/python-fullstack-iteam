@@ -1,8 +1,3 @@
-# ============================================================
-# MÓDULO: arquivo.py
-# Responsável por salvar e ler notas no formato JSON
-# ============================================================
-
 import json
 import os
 
