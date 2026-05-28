@@ -15,6 +15,130 @@ cada um deles, aplicando os conceitos de POO estudados.
 
 ---
 
+## 📊 Diagrama de Classes
+
+<img src="docs/diagrama_salao_iteam.svg" alt="Diagrama de Classes — Salão ITEAM Beauty" width="700"/>
+
+### Entendendo o diagrama
+
+O diagrama acima é um **mapa de decisões de design**. Cada seta e cada tipo de conexão
+representa uma escolha consciente do programador sobre como as classes se relacionam.
+
+---
+
+#### 🔵 Herança — "É UM"
+
+No topo do diagrama está `Pessoa`. Tanto `Funcionario` quanto `Coordenador` apontam para
+ela com **setas tracejadas e triângulo vazado** — o símbolo de herança.
+
+Isso significa: um `Funcionario` **é uma** `Pessoa`. Um `Coordenador` **é uma** `Pessoa`.
+Eles herdam automaticamente nome, CPF, telefone e os métodos `@property`. No código,
+isso se expressa com `super().__init__()`:
+
+```python
+class Funcionario(Pessoa):
+    def __init__(self, nome, cpf, telefone, cargo, salario_base):
+        super().__init__(nome, cpf, telefone)  # repassa para Pessoa
+        self.cargo = cargo
+```
+
+> **Regra prática:** use herança quando a frase "X **é um** Y" fizer sentido no mundo real.
+> Um `Coordenador` é um `Funcionario`? Sim — então `Coordenador(Funcionario)` é correto.
+
+---
+
+#### 🟣 Realização de Interface — "Se compromete a ser"
+
+`EquipeCabelo`, `EquipeManicure` e `EquipeSpa` também usam setas tracejadas com triângulo
+vazado, mas apontam para `Equipe` — que é uma **classe abstrata (interface)**.
+
+`Equipe` herda de `ABC` do Python e declara métodos com `@abstractmethod`. Isso cria um
+**contrato**: qualquer classe que herde de `Equipe` é obrigada a implementar
+`descricao_servicos()` e `realizar_servico()`. Se não implementar, o Python recusa
+instanciar o objeto.
+
+```python
+from abc import ABC, abstractmethod
+
+class Equipe(ABC):
+    @abstractmethod
+    def realizar_servico(self, cliente: str, servico: str):
+        pass   # nenhuma lógica aqui — só o contrato
+```
+
+O resultado é **polimorfismo garantido**: o `Salao` pode chamar
+`equipe.realizar_servico(cliente, servico)` para qualquer equipe, sem precisar saber
+se é cabelo, manicure ou spa — Duck Typing com segurança extra.
+
+> **Regra prática:** use interface quando você precisa que tipos diferentes respondam
+> à mesma chamada, cada um à sua maneira, e quer garantir que ninguém "esqueça"
+> de implementar o método.
+
+---
+
+#### 🟡 Composição — "Tem e controla"
+
+As setas com **losango preenchido** saem do `Salao` e chegam em `Coordenador`, `Equipe`
+e `Equipamento`. Isso é **composição**: o `Salao` cria, possui e controla o ciclo de
+vida dessas dependências.
+
+```python
+class Salao:
+    def __init__(self, nome, endereco, coordenador):
+        self.coordenador    = coordenador   # composição
+        self.__equipes      = []            # composição
+        self.__equipamentos = []            # composição
+```
+
+Note que `__equipes` e `__equipamentos` são **listas privadas**. Ninguém de fora pode
+acessá-las diretamente — apenas pelos métodos `adicionar_equipe()` e
+`adicionar_equipamento()`. Isso é encapsulamento protegendo a composição.
+
+> **Regra prática:** use composição quando o objeto "filho" não faz sentido existir
+> sem o "pai". Se o `Salao` fechar, suas equipes e equipamentos perdem o contexto.
+> A composição modela essa dependência forte.
+
+---
+
+#### ⬜ Agregação — "Tem, mas não controla"
+
+A seta com **losango vazado** sai de `Equipe` e aponta para `Funcionario`.
+Isso é **agregação** — uma relação mais fraca que a composição.
+
+`Equipe` mantém uma lista `_membros` de funcionários, mas não os cria nem os destrói.
+Um `Funcionario` existe independentemente de qualquer equipe: ele pode ser criado antes
+de entrar para uma equipe, e continua existindo se sair dela.
+
+```python
+class Equipe(ABC):
+    def __init__(self, nome_equipe):
+        self._membros = []   # agrega, não cria
+
+    def adicionar_membro(self, funcionario: Funcionario):
+        self._membros.append(funcionario)  # recebe de fora, não instancia
+```
+
+> **Regra prática:** a diferença entre composição e agregação é a pergunta
+> _"se o pai morrer, o filho morre junto?"_.
+> Se **sim** → composição. Se **não** → agregação.
+> Um `Funcionario` sobrevive sem a equipe, portanto é agregação.
+
+---
+
+#### Tabela resumo dos relacionamentos
+
+| Símbolo | Nome | Frase-chave | Exemplo no projeto |
+|---|---|---|---|
+| Seta tracejada + triângulo vazado | Herança | "É um" | `Funcionario` é uma `Pessoa` |
+| Seta tracejada + triângulo vazado | Realização | "Se compromete a ser" | `EquipeCabelo` implementa `Equipe` |
+| Losango **cheio** + seta | Composição | "Tem e controla" | `Salao` cria e gerencia `Equipe` |
+| Losango **vazio** + seta | Agregação | "Tem, mas não controla" | `Equipe` usa `Funcionario` externo |
+
+> Ao corrigir os bugs do projeto, sempre volte ao diagrama e pergunte:
+> _"que tipo de relação esta classe deveria ter com a outra?"_
+
+---
+
 ## 🗂️ Estrutura de Pastas
 
 ```
@@ -22,6 +146,8 @@ salao_iteam/
 │
 ├── README.md                  ← você está aqui
 ├── main.py                    ← ponto de entrada da aplicação
+├── docs/
+│   └── diagrama_salao_iteam.svg  ← diagrama de classes
 │
 └── salao/                     ← pacote principal
     ├── __init__.py
@@ -57,18 +183,7 @@ cd salao_iteam
 
 ### PASSO 2 — Verificar a estrutura
 
-Confira se todas as pastas e arquivos existem:
-
-```
-salao_iteam/
-├── README.md
-├── main.py
-└── salao/
-    ├── __init__.py
-    ├── modelos/  (animal.py, pessoa.py, funcionario.py, equipamento.py)
-    ├── equipes/  (equipe.py, cabelo.py, manicure.py, spa.py)
-    └── gestao/   (salao.py)
-```
+Confirme que todas as pastas e arquivos foram clonados corretamente.
 
 ### PASSO 3 — Tentar rodar (vai dar erro!)
 
@@ -78,7 +193,7 @@ python main.py
 
 Você verá um erro. Isso é esperado — os bugs estão lá esperando por você.
 
-### PASSO 4 — Ler o mapa de bugs abaixo e corrigi-los um a um
+### PASSO 4 — Corrigir os bugs seguindo o mapa abaixo
 
 ---
 
@@ -305,7 +420,7 @@ total += f.calcular_salario()
 <summary><strong>BUG 14 — main.py: argumentos fora de ordem</strong></summary>
 
 ```python
-# ERRADO
+# ERRADO  (cargo, cpf, telefone, nome, salario)
 func_ana = Funcionario("Cabeleireira", "111.222.333-44",
                        "(92)99999-1111", "Ana Costa", 2200.00)
 
@@ -329,7 +444,7 @@ func_ana = Funcionario("Ana Costa", "111.222.333-44",
 | 5.5 | Design de Classes — Composição |
 | 5.6 | Herança e `super()` |
 | 5.7 | Duck Typing |
-| 4.6/4.7 | Módulos e Pacotes Python |
+| 4.6 / 4.7 | Módulos e Pacotes Python |
 
 ---
 
@@ -339,7 +454,7 @@ func_ana = Funcionario("Ana Costa", "111.222.333-44",
 - [ ] `python main.py` executa sem nenhum erro
 - [ ] A saída mostra o relatório financeiro com valores corretos
 - [ ] Os atendimentos do dia são exibidos com polimorfismo funcionando
-- [ ] O código novo segue o padrão `snake_case` (PEP 8)
+- [ ] O código segue o padrão `snake_case` (PEP 8)
 - [ ] Cada correção tem um comentário explicando **o que** foi mudado e **por quê**
 
 ---
