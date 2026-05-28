@@ -1,0 +1,20 @@
+[
+  {
+    "nome": "\u00c1lefe Alves",
+    "cargo": "Estudante",
+    "salario": 130.0,
+    "departamento": "CC"
+  },
+  {
+    "nome": "Amanda de Brito",
+    "cargo": "Estudante",
+    "salario": 700.0,
+    "departamento": "CC"
+  },
+  {
+    "nome": "Luciano dos Santos",
+    "cargo": "Estudante",
+    "salario": 130.0,
+    "departamento": "CC"
+  }
+]
