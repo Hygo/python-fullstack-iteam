@@ -4,7 +4,7 @@ AVALIAÇÃO — Módulos 03 e 04
 Curso de Capacitação Full Stack – ITEAM
 Professor: Msc. Hygo Sousa De Oliveira
 
-Aluno(a): <SEU NOME COMPLETO>
+Aluno(a): <Stephany Olivia da Silva Pereira>
 Data    : <DATA DE ENTREGA>
 =============================================================
 
