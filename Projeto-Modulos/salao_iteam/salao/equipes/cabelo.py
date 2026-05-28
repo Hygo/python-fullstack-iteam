@@ -19,7 +19,7 @@ from salao.equipes.equipe import Equipe
 
 
 # BUG 9 ↓  não herda de Equipe
-class EquipeCabelo:       # ← ERRADO: deveria ser  class EquipeCabelo(Equipe):
+class EquipeCabelo(Equipe):       # ← ERRADO: deveria ser  class EquipeCabelo(Equipe):
     """
     Equipe responsável pelos serviços de cabelo e barba.
     """

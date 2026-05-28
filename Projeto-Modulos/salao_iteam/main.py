@@ -55,21 +55,21 @@ def main():
     # 3. Funcionários
     #    BUG 14: argumentos fora de ordem nos dois primeiros
     # ------------------------------------------------------------------
-    func_ana = Funcionario(
-        "Cabeleireira",        # ← ERRADO: deveria ser o nome primeiro
-        "111.222.333-44",
-        "(92)99999-1111",
-        "Ana Costa",           # ← ERRADO: deveria ser o cargo aqui
-        2200.00,
-    )
+    # func_ana = Funcionario(
+    #     "Cabeleireira",        # ← ERRADO: deveria ser o nome primeiro
+    #     "111.222.333-44",
+    #     "(92)99999-1111",
+    #     "Ana Costa",           # ← ERRADO: deveria ser o cargo aqui
+    #     2200.00,
+    # )
 
-    func_carlos = Funcionario(
-        "Barbeiro",            # ← ERRADO: mesmo problema de ordem
-        "222.333.444-55",
-        "(92)99999-2222",
-        "Carlos Melo",
-        2000.00,
-    )
+    # func_carlos = Funcionario(
+    #     "Barbeiro",            # ← ERRADO: mesmo problema de ordem
+    #     "222.333.444-55",
+    #     "(92)99999-2222",
+    #     "Carlos Melo",
+    #     2000.00,
+    # )
 
     # Estes dois estão corretos (para referência)
     func_lucia = Funcionario("Lúcia Ferreira",  "333.444.555-66",
@@ -86,62 +86,62 @@ def main():
     eq_spa      = EquipeSpa()
 
     eq_cabelo.adicionar_membro(func_ana)
-    eq_cabelo.adicionar_membro(func_carlos)
-    eq_manicure.adicionar_membro(func_lucia)
-    eq_spa.adicionar_membro(func_bia)
+#     eq_cabelo.adicionar_membro(func_carlos)
+#     eq_manicure.adicionar_membro(func_lucia)
+#     eq_spa.adicionar_membro(func_bia)
 
-    # ------------------------------------------------------------------
-    # 5. Equipamentos
-    # ------------------------------------------------------------------
-    print("\n[Cadastrando equipamentos...]")
-    equip1 = Equipamento("EQ001", "Cadeira Hidráulica",   "Cadeira reclinável para corte", 1800.00)
-    equip2 = Equipamento("EQ002", "Secador Profissional",  "2400W, bivolt",                  650.00)
-    equip3 = Equipamento("EQ003", "Maca de Massagem",     "Espuma D45, suporte 200kg",      980.00)
-    equip4 = Equipamento("EQ004", "Autoclave",            "Esterilizador 21L",             3200.00)
+#     # ------------------------------------------------------------------
+#     # 5. Equipamentos
+#     # ------------------------------------------------------------------
+#     print("\n[Cadastrando equipamentos...]")
+#     equip1 = Equipamento("EQ001", "Cadeira Hidráulica",   "Cadeira reclinável para corte", 1800.00)
+#     equip2 = Equipamento("EQ002", "Secador Profissional",  "2400W, bivolt",                  650.00)
+#     equip3 = Equipamento("EQ003", "Maca de Massagem",     "Espuma D45, suporte 200kg",      980.00)
+#     equip4 = Equipamento("EQ004", "Autoclave",            "Esterilizador 21L",             3200.00)
 
-    # ------------------------------------------------------------------
-    # 6. Registra tudo no salão
-    # ------------------------------------------------------------------
+#     # ------------------------------------------------------------------
+#     # 6. Registra tudo no salão
+#     # ------------------------------------------------------------------
     print("\n[Registrando no salão...]")
     salao.adicionar_equipe(eq_cabelo)
     salao.adicionar_equipe(eq_manicure)
     salao.adicionar_equipe(eq_spa)
 
-    salao.adicionar_equipamento(equip1)
-    salao.adicionar_equipamento(equip2)
-    salao.adicionar_equipamento(equip3)
-    salao.adicionar_equipamento(equip4)
+#     salao.adicionar_equipamento(equip1)
+#     salao.adicionar_equipamento(equip2)
+#     salao.adicionar_equipamento(equip3)
+#     salao.adicionar_equipamento(equip4)
 
-    # ------------------------------------------------------------------
-    # 7. Relatórios
-    # ------------------------------------------------------------------
-    salao.listar_equipes()
+#     # ------------------------------------------------------------------
+#     # 7. Relatórios
+#     # ------------------------------------------------------------------
+#     salao.listar_equipes()
 
-    print()
-    eq_cabelo.listar_membros()
-    eq_manicure.listar_membros()
-    eq_spa.listar_membros()
+#     print()
+#     eq_cabelo.listar_membros()
+#     eq_manicure.listar_membros()
+#     eq_spa.listar_membros()
 
-    salao.listar_equipamentos()
-    salao.relatorio_financeiro()
+#     salao.listar_equipamentos()
+#     salao.relatorio_financeiro()
 
-    # ------------------------------------------------------------------
-    # 8. Polimorfismo em ação
-    # ------------------------------------------------------------------
-    print("\n" + "=" * 52)
-    print("  ATENDIMENTOS DO DIA")
-    print("=" * 52)
-    atendimentos = [
-        (eq_cabelo,   "João Neto",    "Corte degradê"),
-        (eq_manicure, "Paula Lima",   "Nail art"),
-        (eq_spa,      "Renata Costa", "Relaxamento"),
-        (eq_cabelo,   "Pedro Alves",  "Barba completa"),
-    ]
-    for equipe, cliente, servico in atendimentos:
-        equipe.realizar_servico(cliente, servico)   # Duck Typing: mesma chamada, tipos diferentes
+#     # ------------------------------------------------------------------
+#     # 8. Polimorfismo em ação
+#     # ------------------------------------------------------------------
+#     print("\n" + "=" * 52)
+#     print("  ATENDIMENTOS DO DIA")
+#     print("=" * 52)
+#     atendimentos = [
+#         (eq_cabelo,   "João Neto",    "Corte degradê"),
+#         (eq_manicure, "Paula Lima",   "Nail art"),
+#         (eq_spa,      "Renata Costa", "Relaxamento"),
+#         (eq_cabelo,   "Pedro Alves",  "Barba completa"),
+#     ]
+#     for equipe, cliente, servico in atendimentos:
+#         equipe.realizar_servico(cliente, servico)   # Duck Typing: mesma chamada, tipos diferentes
 
-    print("\n  Sistema encerrado. Até logo!\n")
+#     print("\n  Sistema encerrado. Até logo!\n")
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()

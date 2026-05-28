@@ -33,7 +33,7 @@ class Funcionario(Pessoa):
     def __init__(self, nome: str, cpf: str, telefone: str,
                  cargo: str, salario_base: float):
         # BUG 3 ↓  faltando o argumento 'telefone'
-        super().__init__(nome, cpf)   # ← ERRADO: deveria ser super().__init__(nome, cpf, telefone)
+        super().__init__(nome, cpf, telefone)  # ← ERRADO: deveria ser super().__init__(nome, cpf, telefone)
         self.cargo       = cargo.strip().title()
         self.salario_base = salario_base
 
@@ -69,7 +69,7 @@ class Coordenador(Funcionario):
 
     def __str__(self):
         return (
-            f"[Coordenador] {self.nome} "
+            f"[Coordenador] {self.__nome} "
             f"| Base: R$ {self.salario_base:.2f} "
             f"| Bônus: R$ {self.calcular_comissao():.2f} "
             f"| Total: R$ {self.calcular_salario():.2f}"
