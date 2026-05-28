@@ -1,0 +1,23 @@
+[
+    {
+        "aluno": "Paulo Mesquita",
+        "nota1": 9.0,
+        "nota2": 8.0,
+        "nota3": 9.0,
+        "media": 8.67
+    },
+    {
+        "aluno": "Joao Silva",
+        "nota1": 9.0,
+        "nota2": 8.0,
+        "nota3": 8.0,
+        "media": 8.33
+    },
+    {
+        "aluno": "Pedro Mosca",
+        "nota1": 7.0,
+        "nota2": 8.0,
+        "nota3": 9.0,
+        "media": 8.0
+    }
+]
