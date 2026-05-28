@@ -343,20 +343,29 @@ def ex11_numero_primo():
     """
     # SUA SOLUÇÃO AQUI
     pass
-
-num = int(input("Digite um número inteiro positivo para verificar se é primo: "))
-if num <= 1:
-    print("Números menores ou iguais a 1 não são primos.")
-else:
-    primo = True
-    for i in range(2, int(num**0.5) + 1):
-        if num % i == 0:
-            primo = False
-            break
-    if primo:
-        print(f"{num} é um número primo.")
+"""
+try:
+    num = int(input("Digite um número inteiro positivo para verificar se é primo: "))
+    
+    if num <= 1:
+        print("Números menores ou iguais a 1 não são primos.")
     else:
-        print(f"{num} não é um número primo.")
+        primo = True
+        for i in range(2, int(num**0.5) + 1):
+            if num % i == 0:
+                primo = False
+                break 
+        
+        if primo:
+            print(f"{num} é um número primo.")
+        else:
+            print(f"{num} não é um número primo.")
+
+except ValueError:
+    print("Entrada inválida. Por favor, digite um número inteiro positivo.")
+else:
+    print("Verificação concluída.")
+    """
 
 # ==============================================================
 # EXERCÍCIO 12 – Analisador de Senha Forte
@@ -387,9 +396,12 @@ criterios = {
 }
 
 for critério, atendido in criterios.items():
-    status = "✅" if atendido else "❌"
-    print(f"{status} {critério}")
-
+    if not atendido:
+        print(input("Tente novamente com uma senha mais forte: "))
+        print(f'Critérios: {criterios}')
+    else:
+        print(f"   - A senha '{senha}' atende ao critério: {critério}")
+        print("   - Ótimo! Senha criada.")
 # ==============================================================
 # EXERCÍCIO 13 – Simulador de Caixa Eletrônico
 # Conceitos: while, //, if/else, try/except
@@ -404,7 +416,7 @@ def ex13_caixa_eletronico():
 
     # SUA SOLUÇÃO AQUI
     pass
-
+"""
 saque = int(input("Digite o valor do saque (múltiplo de R$10, máximo R$3.000): "))
 if saque % 10 != 0 or saque > 3000 or saque <= 0:
     print("Valor inválido. O saque deve ser um múltiplo de R$10, maior que 0 e no máximo R$3.000.")
@@ -417,7 +429,7 @@ else:
             saque -= quantidade * cedula
         else:
             print(f"0 cédula(s) de R${cedula}")
-
+"""
 # ==============================================================
 # EXERCÍCIO 14 – Leitura de Múltiplos Dados com Tratamento
 # Conceitos: while, break, continue, try/except, pass
@@ -432,7 +444,7 @@ def ex14_leitura_notas_turma():
 
     # SUA SOLUÇÃO AQUI
     pass
-
+"""
 nota = input("Digite a nota do aluno (ou 'fim' para encerrar): ")
 while nota.lower() != 'fim':
     try:
@@ -455,7 +467,7 @@ if notas:
     print(f"Menor nota: {menor:.2f}")
 else:
     print("Nenhuma nota válida foi registrada.")
-
+"""
 # ==============================================================
 # EXERCÍCIO 15 – Desafio Final: Menu de Sistema
 # Conceitos: while True, if/elif/else, break, continue, try/except
@@ -473,6 +485,7 @@ def ex15_menu_sistema():
 
     Usa try/except em toda entrada do usuário.
     """
+    """
     while True:
         print("\n" + "=" * 29)
         print("   SISTEMA ITEAM - MENU    ")
@@ -486,7 +499,8 @@ def ex15_menu_sistema():
 
         # SUA SOLUÇÃO AQUI — leia a opção e implemente cada funcionalidade
         pass
-
+        """
+"""
 menu = input("Escolha uma opção: ")
 try:
     opcao = int(menu)
@@ -543,7 +557,7 @@ try:
         print("Opção inválida. Por favor, escolha uma opção do menu.")
 except ValueError:
     print("Entrada inválida. Por favor, digite um número correspondente às opções do menu.")
-
+"""
 # ==============================================================
 # EXECUÇÃO PRINCIPAL
 # Descomente as chamadas dos exercícios que você já resolveu.

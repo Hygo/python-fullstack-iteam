@@ -34,7 +34,7 @@ class Equipamento:
 
     def __init__(self, codigo: str, nome: str, descricao: str, valor: float):
         self.__codigo   = codigo.strip().upper()
-        self.nome       = nome.strip().title()
+        self.__nome       = nome.strip().title()
         self.__descricao = descricao.strip()
         self.valor      = valor
 
@@ -45,16 +45,16 @@ class Equipamento:
     # BUG 5 ↓  atributo escrito errado dentro do método
     def __str__(self):
         return (
-            f"[{self.__codigo}] {self.nome} "
-            f"| {self.descricao} "        # ← ERRADO: deveria ser self.__descricao
+            f"[{self.__codigo}] {self.__nome} "
+            f"| {self.__descricao} "        # ← ERRADO: deveria ser self.__descricao
             f"| R$ {self.valor:.2f}"
         )
 
     def __repr__(self):
-        return f"Equipamento(codigo='{self.__codigo}', nome='{self.nome}')"
+        return f"Equipamento(codigo='{self.__codigo}', nome='{self.__nome}')"
 
     # BUG 6 ↓  comparando nome em vez do código único
     def __eq__(self, outro):
         if not isinstance(outro, Equipamento):
             return False
-        return self.nome == outro.nome    # ← ERRADO: deveria comparar self.__codigo == outro._Equipamento__codigo
+        return self.__codigo == outro._Equipamento__codigo    # ← ERRADO: deveria comparar self.__codigo == outro._Equipamento__codigo

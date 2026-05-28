@@ -790,16 +790,11 @@ for descricao, carrinho in carrinhos:
 
     print(f"\n📋 {descricao}")
     print(f"   Valor original : R${carrinho.valor_total:.2f}")
-    print(f"   {mens
+    print(f"   {mensagem}")
+    print(f"   Economia       : R${economia:.2f}")
+    print(f"   Total final    : R${total_final:.2f}")
 
 # ==============================================================
-# 🔴 ATIVIDADE 5 — Sistema de Processamento de Eventos (Avançado)
-# Nível: Avançado | Conceito: Registry completo + múltiplos registries
-#                             + tratamento de erros + runtime update
-# ==============================================================
-
-print("\n" + "=" * 60)
-print("ATIVIDADE 5 — Sistema de Processamento de Eventos")
 print("=" * 60)
 
 # ── ANTES (if/elif com lógica de negócio embutida) ───────────

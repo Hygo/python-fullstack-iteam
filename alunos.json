@@ -1,0 +1,54 @@
+[
+  {
+    "id": "499e9655",
+    "nome": "Ana Lima",
+    "email": "ana.lima@escola.com",
+    "idade": 20,
+    "notas": [
+      8.5,
+      9.0,
+      7.5,
+      10.0
+    ],
+    "ativo": true
+  },
+  {
+    "id": "fe520906",
+    "nome": "Bruno Souza",
+    "email": "bruno.souza@escola.com",
+    "idade": 22,
+    "notas": [
+      6.0,
+      5.5,
+      7.0,
+      6.5
+    ],
+    "ativo": true
+  },
+  {
+    "id": "e6cf99ee",
+    "nome": "Carla Mendes",
+    "email": "carla.m@escola.com",
+    "idade": 19,
+    "notas": [
+      9.5,
+      10.0,
+      9.0,
+      8.5
+    ],
+    "ativo": true
+  },
+  {
+    "id": "f945aafb",
+    "nome": "Diego Torres",
+    "email": "diego.t@escola.com",
+    "idade": 21,
+    "notas": [
+      4.5,
+      5.0,
+      6.0,
+      5.5
+    ],
+    "ativo": true
+  }
+]
