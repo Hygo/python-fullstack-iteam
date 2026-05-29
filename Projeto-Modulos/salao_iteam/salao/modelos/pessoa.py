@@ -33,7 +33,7 @@ class Pessoa:
 
     def __init__(self, nome: str, cpf: str, telefone: str):
         # BUG 1 ↓  atributos deveriam ser privados (__nome, __cpf)
-        self.nome     = nome.strip().title()   # ← ERRADO: deveria ser self.__nome
+        self.__nome     = nome.strip().title()   # ← ERRADO: deveria ser self.__nome
         self.__cpf    = cpf.strip()
         self.telefone = telefone.strip()
 
@@ -42,7 +42,7 @@ class Pessoa:
     @property
     def nome(self):
         # BUG 2 ↓  recursão infinita! deveria retornar self.__nome
-        return self.nome   # ← ERRADO: troque por  return self.__nome
+        return self.__nome   # ← ERRADO: troque por  return self.__nome
 
     @property
     def cpf(self):
