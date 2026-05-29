@@ -23,13 +23,12 @@
 #          mas está faltando o decorador @abstractmethod.
 #  DICA  : adicione  @abstractmethod  na linha antes de  def realizar_servico
 # ----------------------------------------------------------------------------
-
 from abc import ABC, abstractmethod
 from salao.modelos.funcionario import Funcionario
 
 
-# BUG 7 ↓  não herda de ABC
-class Equipe:          # ← ERRADO: deveria ser  class Equipe(ABC):
+# BUG 7 CORRIGIDO: A classe agora herda de ABC para se tornar genuinamente abstrata
+class Equipe(ABC):          
     """
     Interface base para todas as equipes do salão.
     Define o contrato que TODA equipe deve cumprir.
@@ -55,15 +54,17 @@ class Equipe:          # ← ERRADO: deveria ser  class Equipe(ABC):
         for m in self._membros:
             print(f"  • {m}")
 
-    @abstractmethod       # BUG 8 ↓  este decorador está faltando em realizar_servico
+    @abstractmethod       
     def descricao_servicos(self) -> str:
         """Retorna os serviços oferecidos pela equipe."""
         pass
 
-    # BUG 8: falta @abstractmethod aqui ↓
-    def realizar_servico(self, cliente: str, servico: str):  # ← ERRADO: falta @abstractmethod acima
+    # BUG 8 CORRIGIDO: Adicionado o decorador @abstractmethod
+    @abstractmethod
+    def realizar_servico(self, cliente: str, servico: str):  
         """Registra a realização de um serviço."""
-        raise NotImplementedError("Subclasses devem implementar realizar_servico().")
+        pass
 
     def __str__(self):
         return f"Equipe '{self.nome_equipe}' | {len(self._membros)} membro(s)"
+    

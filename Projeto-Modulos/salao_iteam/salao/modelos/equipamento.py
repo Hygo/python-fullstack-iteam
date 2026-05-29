@@ -42,19 +42,20 @@ class Equipamento:
     def codigo(self):
         return self.__codigo
 
-    # BUG 5 ↓  atributo escrito errado dentro do método
     def __str__(self):
+        # BUG 5 CORRIGIDO: Alterado de self.descricao para self.__descricao
         return (
             f"[{self.__codigo}] {self.nome} "
-            f"| {self.descricao} "        # ← ERRADO: deveria ser self.__descricao
+            f"| {self.__descricao} "        
             f"| R$ {self.valor:.2f}"
         )
 
     def __repr__(self):
         return f"Equipamento(codigo='{self.__codigo}', nome='{self.nome}')"
 
-    # BUG 6 ↓  comparando nome em vez do código único
     def __eq__(self, outro):
         if not isinstance(outro, Equipamento):
             return False
-        return self.nome == outro.nome    # ← ERRADO: deveria comparar self.__codigo == outro._Equipamento__codigo
+        # BUG 6 CORRIGIDO: Comparação feita pelo código único, 
+        # acessando o atributo privado de outro objeto via name-mangling.
+        return self.__codigo == outro._Equipamento__codigo

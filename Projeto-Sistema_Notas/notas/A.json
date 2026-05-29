@@ -1,0 +1,16 @@
+[
+    {
+        "aluno": "joao da silva neto",
+        "nota1": 5.0,
+        "nota2": 6.0,
+        "nota3": 5.0,
+        "media": 5.33
+    },
+    {
+        "aluno": "maria da silva",
+        "nota1": 10.0,
+        "nota2": 10.0,
+        "nota3": 10.0,
+        "media": 10.0
+    }
+]
