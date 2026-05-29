@@ -1,0 +1,50 @@
+[
+  {
+    "id": "1ec57772",
+    "nome": "Ana Beatriz",
+    "email": "ana@email.com",
+    "idade": 20,
+    "notas": [
+      8.5,
+      9.0,
+      7.5
+    ],
+    "ativo": true
+  },
+  {
+    "id": "3df2931c",
+    "nome": "Carlos Lima",
+    "email": "carlos@email.com",
+    "idade": 22,
+    "notas": [
+      6.0,
+      5.5,
+      7.0
+    ],
+    "ativo": true
+  },
+  {
+    "id": "07950dac",
+    "nome": "Mariana Reis",
+    "email": "mari@email.com",
+    "idade": 19,
+    "notas": [
+      9.5,
+      10.0,
+      9.0
+    ],
+    "ativo": true
+  },
+  {
+    "id": "e93bb07c",
+    "nome": "Pedro Nunes",
+    "email": "pedro@email.com",
+    "idade": 21,
+    "notas": [
+      4.5,
+      5.0,
+      6.0
+    ],
+    "ativo": true
+  }
+]

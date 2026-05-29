@@ -1,0 +1,20 @@
+[
+  {
+    "nome": "Lucas Oliveira",
+    "cargo": "Dev Backend",
+    "salario": 8500.0,
+    "departamento": "Tecnologia"
+  },
+  {
+    "nome": "Carla Mendes",
+    "cargo": "UX Designer",
+    "salario": 7200.0,
+    "departamento": "Produto"
+  },
+  {
+    "nome": "Rafael Torres",
+    "cargo": "Data Analyst",
+    "salario": 9100.0,
+    "departamento": "Dados"
+  }
+]

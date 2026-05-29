@@ -1,0 +1,12 @@
+{
+  "total_alunos": 4,
+  "media_geral": 7.29,
+  "maior_media": {
+    "nome": "Mariana Reis",
+    "media": 9.5
+  },
+  "menor_media": {
+    "nome": "Pedro Nunes",
+    "media": 5.17
+  }
+}

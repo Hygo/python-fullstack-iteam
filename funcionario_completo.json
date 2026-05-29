@@ -1,0 +1,13 @@
+{
+  "id": 1042,
+  "nome": "Fernanda Costa",
+  "email": "fernanda@empresa.com",
+  "cargo": "Engenheira de Software",
+  "nivel": "Senior",
+  "salario": 12500.0,
+  "habilidades": [
+    "Python",
+    "Django",
+    "PostgreSQL"
+  ]
+}
