@@ -55,21 +55,12 @@ def main():
     # 3. Funcionários
     #    BUG 14: argumentos fora de ordem nos dois primeiros
     # ------------------------------------------------------------------
-    func_ana = Funcionario(
-        "Cabeleireira",        # ← ERRADO: deveria ser o nome primeiro
-        "111.222.333-44",
-        "(92)99999-1111",
-        "Ana Costa",           # ← ERRADO: deveria ser o cargo aqui
-        2200.00,
-    )
+   # CORRETO  (nome, cpf, telefone, cargo, salario)
+    func_ana = Funcionario("Ana Costa", "111.222.333-44",
+                       "(92)99999-1111", "Cabeleireira", 2200.00)
 
-    func_carlos = Funcionario(
-        "Barbeiro",            # ← ERRADO: mesmo problema de ordem
-        "222.333.444-55",
-        "(92)99999-2222",
-        "Carlos Melo",
-        2000.00,
-    )
+    func_carlos = Funcionario("Carlos Melo", "222.333.444-55",
+                          "(92)99999-2222", "Barbeiro", 2000.00)
 
     # Estes dois estão corretos (para referência)
     func_lucia = Funcionario("Lúcia Ferreira",  "333.444.555-66",

@@ -46,7 +46,7 @@ class Equipamento:
     def __str__(self):
         return (
             f"[{self.__codigo}] {self.nome} "
-            f"| {self.descricao} "        # ← ERRADO: deveria ser self.__descricao
+            f"| {self.__descricao} "        #CORRIGIDO
             f"| R$ {self.valor:.2f}"
         )
 
@@ -57,4 +57,4 @@ class Equipamento:
     def __eq__(self, outro):
         if not isinstance(outro, Equipamento):
             return False
-        return self.nome == outro.nome    # ← ERRADO: deveria comparar self.__codigo == outro._Equipamento__codigo
+        return self.__codigo == outro._Equipamento__codigo    # CORRIGIDO

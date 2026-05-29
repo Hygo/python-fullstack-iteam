@@ -32,6 +32,7 @@ class EquipeManicure(Equipe):
         return "Manicure, pedicure, nail art e esmaltação em gel."
 
     # BUG 10 ↓  assinatura diferente — falta o parâmetro 'servico'
-    def realizar_servico(self, cliente: str):   # ← ERRADO: falta  , servico: str
-        # ERRADO: deveria usar o parâmetro 'servico' na mensagem
-        print(f"  [Manicure] Atendendo {cliente}.")   # ← troque por: f"  [Manicure] Realizando '{servico}' para {cliente}."
+    def realizar_servico(self, cliente: str, servico: str):   # CORRIGIDO
+        print(f"  [Manicure] Realizando '{servico}' para {cliente}.")  # CORRIGIDO
+
+    
