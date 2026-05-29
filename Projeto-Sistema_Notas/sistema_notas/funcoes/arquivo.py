@@ -54,8 +54,37 @@ def salvar_nota(turma, aluno, nota1, nota2, nota3):
     # TODO (Passo 6): Abra o arquivo para escrita com open() e salve
     #                 com json.dump(). Use indent=4 para formatar.
 
-    pass  # ← apague esta linha e escreva seu código aqui
+def salvar_nota(turma, aluno, nota1, nota2, nota3):
+    # Passo 1: calcula a média
+    media = round((nota1 + nota2 + nota3) / 3, 2)
 
+    # Passo 2: monta o dicionário com os dados do aluno
+    registro = {
+        "aluno": aluno,
+        "nota1": nota1,
+        "nota2": nota2,
+        "nota3": nota3,
+        "media": media
+    }
+
+    # Passo 3: monta o caminho do arquivo
+    nome_arquivo = turma.replace(" ", "_") + ".json"
+    caminho = os.path.join("notas", nome_arquivo)
+    os.makedirs("notas", exist_ok=True) 
+
+    # Passo 4: se o arquivo já existe, lê a lista atual; senão, começa vazia
+    if os.path.exists(caminho):
+        with open(caminho, "r", encoding="utf-8") as f:
+            dados = json.load(f)
+    else:
+        dados = []
+
+    # Passo 5: adiciona o novo registro à lista
+    dados.append(registro)
+
+    # Passo 6: grava a lista de volta no arquivo
+    with open(caminho, "w", encoding="utf-8") as f:
+        json.dump(dados, f, indent=4, ensure_ascii=False)
 
 def ler_notas(turma):
     """
@@ -84,4 +113,24 @@ def ler_notas(turma):
     #                 Média : 8.17
     #                 ─────────────────────────────
 
-    pass  # ← apague esta linha e escreva seu código aqui
+def ler_notas(turma):
+    # Passo 1: monta o caminho (igual ao de salvar_nota)
+    nome_arquivo = turma.replace(" ", "_") + ".json"
+    caminho = os.path.join("notas", nome_arquivo)
+
+    # Passo 2: se o arquivo não existe, avisa e sai
+    if not os.path.exists(caminho):
+        print(f"Ainda não há registros para a turma {turma}.")
+        return
+
+    # Passo 3: abre e carrega os dados
+    with open(caminho, "r", encoding="utf-8") as f:
+        dados = json.load(f)
+
+    # Passo 4: percorre a lista e exibe cada aluno
+    print(f"─── Registros da {turma} ───────────────────")
+    for registro in dados:
+        print(f"Aluno : {registro['aluno']}")
+        print(f"Nota 1: {registro['nota1']}  |  Nota 2: {registro['nota2']}  |  Nota 3: {registro['nota3']}")
+        print(f"Média : {registro['media']}")
+        print("─────────────────────────────")

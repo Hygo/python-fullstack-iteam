@@ -1,0 +1,30 @@
+[
+    {
+        "aluno": "Wendenmara Gomes",
+        "nota1": 7.5,
+        "nota2": 8.5,
+        "nota3": 9.0,
+        "media": 8.33
+    },
+    {
+        "aluno": "Fernanda Souza",
+        "nota1": 9.0,
+        "nota2": 9.5,
+        "nota3": 8.5,
+        "media": 9.0
+    },
+    {
+        "aluno": "Priscila Cardoso",
+        "nota1": 7.5,
+        "nota2": 7.0,
+        "nota3": 8.0,
+        "media": 7.5
+    },
+    {
+        "aluno": "Cistina Castro",
+        "nota1": 8.0,
+        "nota2": 7.0,
+        "nota3": 9.0,
+        "media": 8.0
+    }
+]
