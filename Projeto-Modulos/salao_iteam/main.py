@@ -56,18 +56,18 @@ def main():
     #    BUG 14: argumentos fora de ordem nos dois primeiros
     # ------------------------------------------------------------------
     func_ana = Funcionario(
-        "Cabeleireira",        # ← ERRADO: deveria ser o nome primeiro
+        "Ana Costa",        # ← ERRADO: deveria ser o nome primeiro
         "111.222.333-44",
         "(92)99999-1111",
-        "Ana Costa",           # ← ERRADO: deveria ser o cargo aqui
-        2200.00,
+        "Cabeleireira",
+         2200.00,                        # ← ERRADO: deveria ser o cargo aqui 
     )
 
     func_carlos = Funcionario(
-        "Barbeiro",            # ← ERRADO: mesmo problema de ordem
+        "Carlos Melo",            # ← ERRADO: mesmo problema de ordem
         "222.333.444-55",
         "(92)99999-2222",
-        "Carlos Melo",
+        "Barbeiro",
         2000.00,
     )
 
