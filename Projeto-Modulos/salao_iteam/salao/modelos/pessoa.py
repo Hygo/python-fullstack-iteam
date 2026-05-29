@@ -24,7 +24,6 @@
 #          Faça o mesmo para o getter de cpf.
 # ----------------------------------------------------------------------------
 
-
 class Pessoa:
     """
     Classe BASE que representa qualquer pessoa do salão.
@@ -32,8 +31,8 @@ class Pessoa:
     """
 
     def __init__(self, nome: str, cpf: str, telefone: str):
-        # BUG 1 ↓  atributos deveriam ser privados (__nome, __cpf)
-        self.nome     = nome.strip().title()   # ← ERRADO: deveria ser self.__nome
+        # BUG 1 CORRIGIDO: O atributo agora é privado (__nome) para respeitar o encapsulamento
+        self.__nome   = nome.strip().title()   
         self.__cpf    = cpf.strip()
         self.telefone = telefone.strip()
 
@@ -41,8 +40,8 @@ class Pessoa:
 
     @property
     def nome(self):
-        # BUG 2 ↓  recursão infinita! deveria retornar self.__nome
-        return self.nome   # ← ERRADO: troque por  return self.__nome
+        # BUG 2 CORRIGIDO: Retorna o atributo privado, evitando a recursão infinita
+        return self.__nome   
 
     @property
     def cpf(self):
@@ -63,3 +62,4 @@ class Pessoa:
 
     def __repr__(self):
         return f"Pessoa(nome='{self.nome}', cpf='{self.cpf}')"
+    

@@ -32,8 +32,8 @@ class Funcionario(Pessoa):
 
     def __init__(self, nome: str, cpf: str, telefone: str,
                  cargo: str, salario_base: float):
-        # BUG 3 ↓  faltando o argumento 'telefone'
-        super().__init__(nome, cpf)   # ← ERRADO: deveria ser super().__init__(nome, cpf, telefone)
+        # BUG 3 CORRIGIDO: Passando corretamente nome, cpf e telefone para a classe pai
+        super().__init__(nome, cpf, telefone)   
         self.cargo       = cargo.strip().title()
         self.salario_base = salario_base
 
@@ -60,8 +60,8 @@ class Coordenador(Funcionario):
         self.percentual_bonus = percentual_bonus   # ex: 0.15 = 15 %
 
     def calcular_comissao(self) -> float:
-        # BUG 4 ↓  deveria calcular o bônus real
-        return 0   # ← ERRADO: troque por  return self.salario_base * self.percentual_bonus
+        # BUG 4 CORRIGIDO: Agora calcula o bônus real com base no percentual
+        return self.salario_base * self.percentual_bonus   
 
     def calcular_salario(self) -> float:
         """Salário do coordenador = base + bônus."""

@@ -16,7 +16,6 @@
 #          por    def realizar_servico(self, cliente: str, servico: str):
 #          e use  servico  na mensagem de print.
 # ----------------------------------------------------------------------------
-
 from salao.equipes.equipe import Equipe
 
 
@@ -31,7 +30,9 @@ class EquipeManicure(Equipe):
     def descricao_servicos(self) -> str:
         return "Manicure, pedicure, nail art e esmaltação em gel."
 
-    # BUG 10 ↓  assinatura diferente — falta o parâmetro 'servico'
-    def realizar_servico(self, cliente: str):   # ← ERRADO: falta  , servico: str
-        # ERRADO: deveria usar o parâmetro 'servico' na mensagem
-        print(f"  [Manicure] Atendendo {cliente}.")   # ← troque por: f"  [Manicure] Realizando '{servico}' para {cliente}."
+    # BUG 10 CORRIGIDO: Assinatura ajustada para receber o parâmetro 'servico',
+    # respeitando o contrato e a estrutura da classe abstrata Equipe.
+    def realizar_servico(self, cliente: str, servico: str):   
+        # Mensagem atualizada para utilizar a variável do serviço solicitado.
+        print(f"  [Manicure] Realizando '{servico}' para {cliente}.")
+        

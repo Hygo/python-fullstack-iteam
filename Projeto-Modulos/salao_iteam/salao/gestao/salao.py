@@ -23,7 +23,6 @@
 #          tem bônus e o método correto considera isso.
 #  DICA  : troque  total += f.salario_base  por  total += f.calcular_salario()
 # ----------------------------------------------------------------------------
-
 from salao.equipes.equipe import Equipe
 from salao.modelos.equipamento import Equipamento
 from salao.modelos.funcionario import Funcionario, Coordenador
@@ -45,11 +44,11 @@ class Salao:
     # --- Gestão de equipes ---
 
     def adicionar_equipe(self, equipe: Equipe):
-        # BUG 12 ↓  falta validação de tipo antes do append
-        # DICA: adicione aqui o bloco:
-        #   if not isinstance(equipe, Equipe):
-        #       raise TypeError("Apenas objetos Equipe podem ser adicionados.")
-        self.__equipes.append(equipe)   # ← sem validação qualquer coisa entra
+        # BUG 12 CORRIGIDO: Validação de tipo adicionada para proteger a lista interna
+        if not isinstance(equipe, Equipe):
+            raise TypeError("Apenas objetos Equipe podem ser adicionados.")
+            
+        self.__equipes.append(equipe)
         print(f"  Equipe '{equipe.nome_equipe}' registrada no salão.")
 
     def listar_equipes(self):
@@ -93,8 +92,9 @@ class Salao:
             todos_funcionarios.extend(equipe._membros)
 
         for f in todos_funcionarios:
-            # BUG 13 ↓  usando salario_base em vez de calcular_salario()
-            total += f.salario_base   # ← ERRADO: troque por  f.calcular_salario()
+            # BUG 13 CORRIGIDO: Alterado para f.calcular_salario()
+            # Isso garante que se houver cargos polimórficos na equipe (com bônus/comissão), o valor total seja exato.
+            total += f.calcular_salario()
             print(f"  {f}")
 
         # Adiciona o salário do coordenador também

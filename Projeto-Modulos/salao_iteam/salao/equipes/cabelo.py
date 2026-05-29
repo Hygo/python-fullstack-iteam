@@ -18,17 +18,16 @@
 from salao.equipes.equipe import Equipe
 
 
-# BUG 9 ↓  não herda de Equipe
-class EquipeCabelo:       # ← ERRADO: deveria ser  class EquipeCabelo(Equipe):
+# BUG 9 CORRIGIDO: A classe agora herda diretamente de Equipe
+class EquipeCabelo(Equipe):    
     """
     Equipe responsável pelos serviços de cabelo e barba.
     """
 
-    # BUG 9 ↓  __init__ não chama super().__init__
     def __init__(self):
-        # ERRADO: deveria ter  super().__init__("Cabelo & Barba")
-        self.nome_equipe = "Cabelo & Barba"
-        self._membros    = []               # precisou redeclarar porque não herdou!
+        # BUG 9 CORRIGIDO: Chama o construtor da classe pai passando o nome correto.
+        # A inicialização da lista de membros agora é herdada automaticamente.
+        super().__init__("Cabelo & Barba") 
 
     def descricao_servicos(self) -> str:
         return "Corte, coloração, escova, barba e bigode."
