@@ -26,14 +26,14 @@ def obter_turma():
     #       - Se o valor digitado for "sair" (após .strip().lower()), retorne None.
     #       - Se validar_turma() retornar True, retorne o nome da turma.
     #       - Caso contrário, imprima uma mensagem de erro e repita o loop.
-
     while True:
      turma = input("Digite o nome da turma (ou 'sair' para encerrar): ").strip()
-     if turma.lower() == "sair":
+     if turma.lower().strip() == "sair":
         return None
-     if validar_turma(turma):
+     elif validar_turma(turma):
         return turma
-     print("Nome de turma inválido. Tente novamente.") 
+     else:
+      print("Nome de turma inválido. Tente novamente.") 
 
 def obter_aluno():
     """
@@ -45,8 +45,13 @@ def obter_aluno():
     """
     # TODO: Mesma lógica de obter_turma(), mas usando validar_aluno().
     #       Lembre de verificar "sair" antes de validar.
-    pass  # ← apague esta linha e escreva seu código aqui
-
+    aluno = input("Digite o nome do aluno (ou 'sair' para encerrar): ").strip()
+    if aluno.lower().strip() == "sair":
+        return None
+    elif validar_aluno(aluno):
+        return aluno
+    else:
+      print("Nome de aluno inválido. Tente novamente.") 
 
 def obter_nota(numero_da_nota):
     """
@@ -62,8 +67,13 @@ def obter_nota(numero_da_nota):
     #       Chame validar_nota() com o valor digitado.
     #       - Se retornar None (inválido), exiba uma mensagem de erro.
     #       - Se retornar um float válido, retorne-o.
-    pass  # ← apague esta linha e escreva seu código aqui
-
+    while True:
+        nota = input(f"Digite a nota {numero_da_nota}: ").strip()
+        valor_validado = validar_nota(nota)
+        if valor_validado is not None:
+            return valor_validado
+        else:
+            print("Nota inválida. Digite um número entre 0 e 10.")
 
 def main():
     """
@@ -76,24 +86,30 @@ def main():
 
     # TODO (Passo 1): Chame obter_turma() para capturar o nome da turma.
     #                 Se retornar None, imprima "Encerrando..." e encerre com return.
-
     # TODO (Passo 2): Inicie um loop while True para cadastrar múltiplos alunos.
     #                 Dentro do loop:
-    #
     #   a) Chame obter_aluno(). Se retornar None, quebre o loop (break).
-    #
     #   b) Chame obter_nota(1), obter_nota(2) e obter_nota(3)
     #      para capturar as três notas do aluno.
-    #
     #   c) Chame salvar_nota() passando turma, aluno e as três notas.
     #      Exiba uma mensagem de sucesso após salvar.
-    #
     #   d) Chame ler_notas() para exibir todos os registros da turma até agora.
-
     # TODO (Passo 3): Fora do loop, imprima uma mensagem de encerramento.
-
-    pass  # ← apague esta linha e escreva seu código aqui
-
+    turma = obter_turma()
+    if turma is None:
+        print("Encerrando...")
+        return
+    while True:
+        aluno = obter_aluno()
+        if aluno is None:
+            break
+        nota1 = obter_nota(1)
+        nota2 = obter_nota(2)
+        nota3 = obter_nota(3)
+        salvar_nota(turma, aluno, nota1, nota2, nota3)
+        print(f"Notas de {aluno} salvas com sucesso!")
+        ler_notas(turma)
+    print("Encerrando...")
 
 # ── Ponto de entrada do programa ──────────────────────────
 # Esta condicional garante que main() só é chamada quando
