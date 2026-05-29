@@ -1,0 +1,12 @@
+{
+  "id": 101,
+  "nome": "Teclado Mecânico RGB",
+  "preco": 349.9,
+  "estoque": 42,
+  "disponivel": true,
+  "categorias": [
+    "Periféricos",
+    "Informática",
+    "Gamer"
+  ]
+}

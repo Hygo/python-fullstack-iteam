@@ -1,0 +1,27 @@
+[
+  {
+    "timestamp": "2026-05-28T19:10:35.083415",
+    "nivel": "INFO",
+    "mensagem": "App iniciada"
+  },
+  {
+    "timestamp": "2026-05-28T19:10:35.093526",
+    "nivel": "WARNING",
+    "mensagem": "Memória 80%"
+  },
+  {
+    "timestamp": "2026-05-28T19:10:35.104078",
+    "nivel": "ERROR",
+    "mensagem": "Falha no pagamento"
+  },
+  {
+    "timestamp": "2026-05-28T19:10:35.114997",
+    "nivel": "INFO",
+    "mensagem": "Conexão DB OK"
+  },
+  {
+    "timestamp": "2026-05-28T19:10:35.122302",
+    "nivel": "WARNING",
+    "mensagem": "Token expirando"
+  }
+]

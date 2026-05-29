@@ -1,0 +1,14 @@
+{
+  "app": {
+    "nome": "SistemaX",
+    "versao": "1.0.0",
+    "porta": 8080
+  },
+  "banco": {
+    "host": "localhost",
+    "porta": 5432
+  },
+  "email": {
+    "smtp": "smtp.gmail.com"
+  }
+}
