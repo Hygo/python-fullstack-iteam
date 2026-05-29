@@ -17,7 +17,7 @@ Este projeto é o ponto de partida da sua jornada em desenvolvimento de software
 
 O diagrama abaixo mostra a **estrutura de pastas** do projeto e o **fluxo completo do programa**, desde a leitura da turma até o salvamento e exibição das notas. Leia-o com atenção antes de começar a codificar.
 
-![Diagrama do Sistema de Lançamento de Notas](/img/diagrama_sistema_notas.png)
+![Diagrama do Sistema de Lançamento de Notas](diagrama_projeto_notas.svg)
 
 > 💡 **Dica:** Sempre que travar em algum `TODO`, volte ao diagrama e localize em qual etapa do fluxo você está. Isso vai ajudar a entender o que a função precisa receber, processar e retornar.
 
