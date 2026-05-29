@@ -1,0 +1,12 @@
+{
+    "total_alunos": 4,
+    "media_geral": 7.21,
+    "aluno_maior_media": {
+        "nome": "Rafael Nóbrega",
+        "media": 9.17
+    },
+    "aluno_menor_media": {
+        "nome": "Diego Mendes",
+        "media": 4.17
+    }
+}
