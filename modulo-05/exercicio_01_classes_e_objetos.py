@@ -37,17 +37,12 @@ class Aluno:
     def __init__(self, nome, idade, matricula):
         """
         Inicializa um novo objeto Aluno.
-
-        Args:
-            nome (str): Nome completo do aluno.
-            idade (int): Idade do aluno.
-            matricula (str): Código de matrícula.
         """
         # TODO: Atribua os parâmetros aos atributos de instância usando 'self'
-        self.nome = None          # substitua None pelo parâmetro correto
-        self.idade = None         # substitua None pelo parâmetro correto
-        self.matricula = None     # substitua None pelo parâmetro correto
-        self.notas = []           # lista vazia para armazenar as notas
+        self.nome = nome          # Substituído None pelo parâmetro nome
+        self.idade = idade        # Substituído None pelo parâmetro idade
+        self.matricula = matricula  # Substituído None pelo parâmetro matricula
+        self.notas = []           # Lista vazia para armazenar as notas
 
     def adicionar_nota(self, nota):
         """
@@ -57,10 +52,11 @@ class Aluno:
             nota (float): Nota a ser adicionada (deve estar entre 0 e 10).
         """
         # TODO: Valide se a nota está entre 0 e 10.
-        # Se estiver no intervalo válido, adicione à lista self.notas
-        # e imprima uma mensagem de confirmação.
-        # Caso contrário, informe que a nota é inválida.
-        pass
+        if 0 <= nota <= 10:
+            self.notas.append(nota)
+            print(f"Nota {nota} adicionada com sucesso para o(a) aluno(a) {self.nome}!")
+        else:
+            print(f"Erro: A nota {nota} é inválida! Digite um valor entre 0 e 10.")
 
     def calcular_media(self):
         """
@@ -70,11 +66,13 @@ class Aluno:
             float: Média das notas, ou 0.0 se não houver notas.
         """
         # TODO: Calcule a média das notas.
-        # Dica: use sum() e len() para calcular a média.
-        # Lembre-se de tratar o caso em que self.notas está vazio (divisão por zero!).
-        pass
+        # Trata o caso em que self.notas está vazio para evitar ZeroDivisionError
+        if not self.notas:
+            return 0.0
+        
+        return sum(self.notas) / len(self.notas)
 
-    def obter_situacao(self):
+    def obtener_situacao(self):
         """
         Retorna a situação do aluno (Aprovado, Recuperação ou Reprovado)
         com base na média calculada.
@@ -83,25 +81,30 @@ class Aluno:
             str: Situação do aluno.
         """
         # TODO: Com base na média, retorne a situação:
-        #   - Média >= 7.0: "Aprovado"
-        #   - Média >= 5.0 e < 7.0: "Recuperação"
-        #   - Média < 5.0: "Reprovado"
-        pass
+        media = self.calcular_media()
+        
+        if media >= 7.0:
+            return "Aprovado"
+        elif media >= 5.0:
+            return "Recuperação"
+        else:
+            return "Reprovado"
 
     def apresentar(self):
         """
         Imprime na tela as informações completas do aluno de forma formatada.
         """
-        # TODO: Imprima as informações do aluno no seguinte formato:
-        #
-        # =============================
-        # Nome:      [nome do aluno]
-        # Matrícula: [código]
-        # Idade:     [idade] anos
-        # Média:     [média formatada com 1 casa decimal]
-        # Situação:  [situação]
-        # =============================
-        pass
+        # TODO: Imprima as informações do aluno no formato solicitado
+        media = self.calcular_media()
+        situacao = self.obtener_situacao()
+        
+        print("\n=============================")
+        print(f"Nome:      {self.nome}")
+        print(f"Matrícula: {self.matricula}")
+        print(f"Idade:     {self.idade} anos")
+        print(f"Média:     {media:.1f}")
+        print(f"Situação:  {situacao}")
+        print("=============================")
 
 
 # =============================================================================
@@ -114,14 +117,29 @@ if __name__ == "__main__":
     print("  SISTEMA DE CADASTRO DE ALUNOS - ITEAM")
     print("=" * 50)
 
-    # TODO: Crie pelo menos 2 objetos da classe Aluno com dados diferentes
-    # Exemplo:
-    # aluno1 = Aluno("Ana Lima", 20, "2024001")
+    # 1. Criando 2 objetos da classe Aluno com dados diferentes
+    aluno1 = Aluno("Carlos Souza", 22, "ITEAM2026-01")
+    aluno2 = Aluno("Mariana Silva", 19, "ITEAM2026-02")
 
-    # TODO: Adicione pelo menos 3 notas para cada aluno usando o método adicionar_nota()
+    print("\n--- Cadastrando Notas ---")
+    # 2. Adicionando 3 notas válidas para o aluno 1
+    aluno1.adicionar_nota(8.5)
+    aluno1.adicionar_nota(7.0)
+    aluno1.adicionar_nota(9.0)
 
-    # TODO: Chame o método apresentar() para cada aluno e verifique os resultados
+    # 3. Adicionando 3 notas válidas para o aluno 2
+    aluno2.adicionar_nota(5.5)
+    aluno2.adicionar_nota(6.0)
+    aluno2.adicionar_nota(4.5)
 
-    # TODO (DESAFIO): Tente adicionar uma nota inválida (ex: 11 ou -1) e veja o que acontece
+    # 4. DESAFIO: Tentando adicionar notas inválidas
+    print("\n--- Testando o Desafio (Validação de Notas) ---")
+    aluno1.adicionar_nota(-1.5)  # Deve exibir mensagem de erro
+    aluno2.adicionar_nota(11.0)  # Deve exibir mensagem de erro
+
+    print("\n--- Relatório Final dos Alunos ---")
+    # 5. Chamando o método apresentar() para exibir o resultado final
+    aluno1.apresentar()
+    aluno2.apresentar()
 
     print("\nExercício concluído!")
