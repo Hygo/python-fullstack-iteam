@@ -3,7 +3,6 @@
 # Responsável por todas as funções de validação do sistema
 # ============================================================
 
-
 def validar_turma(nome_turma):
     """
     Valida o nome da turma informado pelo usuário.
@@ -18,11 +17,14 @@ def validar_turma(nome_turma):
     Retorno:
         bool: True se válido, False caso contrário
     """
-    # TODO: Verifique se nome_turma, após remover espaços com .strip(),
-    #       está vazia OU é igual à palavra "sair" (case-insensitive).
-    #       Se qualquer uma das condições for verdadeira, retorne False.
-    #       Caso contrário, retorne True.
-    pass  # ← apague esta linha e escreva seu código aqui
+    # Remove espaços extras do início e fim
+    turma_limpa = nome_turma.strip()
+
+    # Verifica se está vazia ou se é igual a "sair" (usando .lower() para ser case-insensitive)
+    if turma_limpa == "" or turma_limpa.lower() == "sair":
+        return False
+
+    return True
 
 
 def validar_aluno(nome_aluno):
@@ -40,12 +42,19 @@ def validar_aluno(nome_aluno):
     Retorno:
         bool: True se válido, False caso contrário
     """
-    # TODO: Remova espaços extras com .strip().
-    #       Verifique se está vazia ou é igual a "sair".
-    #       Use .split() para separar as palavras e confirme
-    #       que o aluno informou ao menos 2 palavras.
-    #       Retorne True apenas se todas as condições passarem.
-    pass  # ← apague esta linha e escreva seu código aqui
+    # Remove espaços extras do início e fim
+    aluno_limpo = nome_aluno.strip()
+
+    # Verifica se está vazia ou se é igual a "sair"
+    if aluno_limpo == "" or aluno_limpo.lower() == "sair":
+        return False
+
+    # Separa as palavras por espaços para contar quantas foram digitadas
+    palavras = aluno_limpo.split()
+    if len(palavras) < 2:
+        return False
+
+    return True
 
 
 def validar_nota(valor_digitado):
@@ -62,9 +71,20 @@ def validar_nota(valor_digitado):
     Retorno:
         float ou None: o valor convertido se válido, ou None se inválido
     """
-    # TODO: Substitua vírgula por ponto para aceitar "7,5" como "7.5".
-    #       Tente converter para float dentro de um bloco try/except.
-    #       Se a conversão falhar (ValueError), retorne None.
-    #       Se o número estiver fora do intervalo [0.0, 10.0], retorne None.
-    #       Se tudo estiver correto, retorne o float convertido.
-    pass  # ← apague esta linha e escreva seu código aqui
+    # Remove espaços e substitui a vírgula por ponto decimal
+    valor_formatado = valor_digitado.strip().replace(",", ".")
+
+    try:
+        # Tenta a conversão para número decimal
+        nota = float(valor_formatado)
+
+        # Verifica se está dentro do intervalo permitido [0.0, 10.0]
+        if nota < 0.0 or nota > 10.0:
+            return None
+
+        return nota
+
+    except ValueError:
+        # Retorna None caso o texto não seja um número válido (ex: "sete")
+        return None
+    

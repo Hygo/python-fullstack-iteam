@@ -2,7 +2,6 @@
 # MÓDULO: arquivo.py
 # Responsável por salvar e ler notas no formato JSON
 # ============================================================
-
 import json
 import os
 
@@ -14,47 +13,40 @@ def salvar_nota(turma, aluno, nota1, nota2, nota3):
     O arquivo será nomeado com o nome da turma (ex: turma_A.json).
     Se o arquivo já existir, o aluno é adicionado à lista existente.
     Se não existir, um novo arquivo é criado.
-
-    Estrutura do JSON salvo:
-        [
-            {
-                "aluno": "Maria Silva",
-                "nota1": 8.0,
-                "nota2": 7.5,
-                "nota3": 9.0,
-                "media": 8.17
-            },
-            ...
-        ]
-
-    Parâmetros:
-        turma  (str)  : nome da turma (usado como nome do arquivo)
-        aluno  (str)  : nome do aluno
-        nota1  (float): primeira nota
-        nota2  (float): segunda nota
-        nota3  (float): terceira nota
     """
-    # TODO (Passo 1): Calcule a média das três notas.
-    #                 Arredonde para 2 casas decimais com round().
+    # Passo 1: Calcule a média das três notas e arredonde para 2 casas decimais.
+    media = round((nota1 + nota2 + nota3) / 3, 2)
 
-    # TODO (Passo 2): Monte um dicionário chamado `registro` com as chaves:
-    #                 "aluno", "nota1", "nota2", "nota3" e "media".
+    # Passo 2: Monte um dicionário chamado `registro`.
+    registro = {
+        "aluno": aluno,
+        "nota1": nota1,
+        "nota2": nota2,
+        "nota3": nota3,
+        "media": media
+    }
 
-    # TODO (Passo 3): Monte o caminho do arquivo usando os.path.join().
-    #                 A pasta deve ser "notas" e o arquivo deve ter o nome
-    #                 da turma + ".json" (ex: "notas/turma_A.json").
-    #                 Dica: use turma.replace(" ", "_") para evitar espaços.
+    # Passo 3: Monte o caminho do arquivo usando os.path.join().
+    # Garante que a pasta "notas" existe antes de salvar o arquivo.
+    if not os.path.exists("notas"):
+        os.makedirs("notas")
+        
+    nome_arquivo = f"{turma.replace(' ', '_')}.json"
+    caminho_arquivo = os.path.join("notas", nome_arquivo)
 
-    # TODO (Passo 4): Verifique se o arquivo já existe com os.path.exists().
-    #                 - Se existir: abra com open() e leia a lista atual com json.load().
-    #                 - Se não existir: crie uma lista vazia chamada `dados`.
+    # Passo 4: Verifique se o arquivo já existe.
+    if os.path.exists(caminho_arquivo):
+        with open(caminho_arquivo, "r", encoding="utf-8") as arquivo:
+            dados = json.load(arquivo)
+    else:
+        dados = []
 
-    # TODO (Passo 5): Adicione o `registro` à lista `dados` com .append().
+    # Passo 5: Adicione o `registro` à lista `dados`.
+    dados.append(registro)
 
-    # TODO (Passo 6): Abra o arquivo para escrita com open() e salve
-    #                 com json.dump(). Use indent=4 para formatar.
-
-    pass  # ← apague esta linha e escreva seu código aqui
+    # Passo 6: Abra o arquivo para escrita e salve com json.dump().
+    with open(caminho_arquivo, "w", encoding="utf-8") as arquivo:
+        json.dump(dados, arquivo, indent=4, ensure_ascii=False)
 
 
 def ler_notas(turma):
@@ -63,25 +55,24 @@ def ler_notas(turma):
 
     Se o arquivo não existir, exibe uma mensagem informando
     que ainda não há registros para aquela turma.
-
-    Parâmetros:
-        turma (str): nome da turma cujos dados serão lidos
     """
-    # TODO (Passo 1): Monte o caminho do arquivo da mesma forma que em salvar_nota().
+    # Passo 1: Monte o caminho do arquivo da mesma forma que em salvar_nota().
+    nome_arquivo = f"{turma.replace(' ', '_')}.json"
+    caminho_arquivo = os.path.join("notas", nome_arquivo)
 
-    # TODO (Passo 2): Verifique se o arquivo existe.
-    #                 Se não existir, imprima uma mensagem adequada e retorne.
+    # Passo 2: Verifique se o arquivo existe.
+    if not os.path.exists(caminho_arquivo):
+        print(f"\nAviso: Ainda não há registros para a turma '{turma}'.")
+        return
 
-    # TODO (Passo 3): Abra o arquivo com open() e carregue os dados com json.load().
+    # Passo 3: Abra o arquivo e carregue os dados com json.load().
+    with open(caminho_arquivo, "r", encoding="utf-8") as arquivo:
+        dados = json.load(arquivo)
 
-    # TODO (Passo 4): Percorra a lista de registros com um loop for.
-    #                 Para cada registro, exiba: nome do aluno, as 3 notas e a média.
-    #                 Formate a saída de forma legível para o usuário.
-    #                 Exemplo de exibição:
-    #
-    #                 Aluno : Maria Silva
-    #                 Nota 1: 8.0  |  Nota 2: 7.5  |  Nota 3: 9.0
-    #                 Média : 8.17
-    #                 ─────────────────────────────
-
-    pass  # ← apague esta linha e escreva seu código aqui
+    # Passo 4: Percorra a lista de registros e exiba as informações.
+    print(f"\n=== NOTAS DA TURMA: {turma} ===")
+    for registro in dados:
+        print(f"Aluno : {registro['aluno']}")
+        print(f"Nota 1: {registro['nota1']}  |  Nota 2: {registro['nota2']}  |  Nota 3: {registro['nota3']}")
+        print(f"Média : {registro['media']}")
+        print("─────────────────────────────")
