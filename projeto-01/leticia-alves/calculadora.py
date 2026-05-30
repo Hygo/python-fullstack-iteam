@@ -53,12 +53,18 @@ class Radiciacao:
 
 
 # ---------------- CALCULADORA ---------------- #
-def calcular(operacao: str, a: float, b: float = None):
+def calcular(operacao: str, a: float, b: float | None = None):
     if operacao not in calculadora_operacoes:
-        raise ValueError(f"Operação {operacao} inválida!!")
-    
+        raise ValueError(f"Operação {operacao} inválida!")
+
+    if operacao != "raiz" and b is None:
+        raise ValueError(f"Operação {operacao} requer dois operandos (a e b).")
+
+    if operacao == "raiz" and b is not None:
+        raise ValueError("Operação raiz aceita apenas um operando (a).")
+
     classe_op = calculadora_operacoes[operacao]()
-    return classe_op.executar(a,b)
+    return classe_op.executar(a, b)
 
 # ---------------- TESTES ---------------- #
 
