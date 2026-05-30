@@ -6,6 +6,9 @@
 import json
 import os
 
+DIRETORIO_FUNCOES = os.path.dirname(os.path.abspath(__file__))
+DIRETORIO_PROJETO = os.path.dirname(DIRETORIO_FUNCOES)
+CAMINHO_PASTA_NOTAS = os.path.join(DIRETORIO_PROJETO, "notas")
 
 def salvar_nota(turma, aluno, nota1, nota2, nota3):
     """
@@ -34,27 +37,36 @@ def salvar_nota(turma, aluno, nota1, nota2, nota3):
         nota2  (float): segunda nota
         nota3  (float): terceira nota
     """
-    # TODO (Passo 1): Calcule a média das três notas.
-    #                 Arredonde para 2 casas decimais com round().
+    
+    media = round((nota1 + nota2 + nota3) / 3, 2)
 
-    # TODO (Passo 2): Monte um dicionário chamado `registro` com as chaves:
-    #                 "aluno", "nota1", "nota2", "nota3" e "media".
+    registro = {
+        "aluno": aluno,
+        "nota1": nota1,
+        "nota2": nota2,
+        "nota3": nota3,
+        "media": media
+    }
 
-    # TODO (Passo 3): Monte o caminho do arquivo usando os.path.join().
-    #                 A pasta deve ser "notas" e o arquivo deve ter o nome
-    #                 da turma + ".json" (ex: "notas/turma_A.json").
-    #                 Dica: use turma.replace(" ", "_") para evitar espaços.
+    # Verifica se a pasta 'notas' existe usando o caminho absoluto. Se não, cria.
+    if not os.path.exists(CAMINHO_PASTA_NOTAS):
+        os.makedirs(CAMINHO_PASTA_NOTAS)
 
-    # TODO (Passo 4): Verifique se o arquivo já existe com os.path.exists().
-    #                 - Se existir: abra com open() e leia a lista atual com json.load().
-    #                 - Se não existir: crie uma lista vazia chamada `dados`.
+    nome_arquivo = f"{turma.replace(' ', '_')}.json"
+    
+    # Junta o caminho absoluto da pasta notas com o nome do arquivo
+    caminho_arquivo = os.path.join(CAMINHO_PASTA_NOTAS, nome_arquivo)
 
-    # TODO (Passo 5): Adicione o `registro` à lista `dados` com .append().
+    if os.path.exists(caminho_arquivo):
+        with open(caminho_arquivo, 'r', encoding='utf-8') as arquivo_leitura:
+            dados = json.load(arquivo_leitura)
+    else:
+        dados = []
 
-    # TODO (Passo 6): Abra o arquivo para escrita com open() e salve
-    #                 com json.dump(). Use indent=4 para formatar.
+    dados.append(registro)
 
-    pass  # ← apague esta linha e escreva seu código aqui
+    with open(caminho_arquivo, 'w', encoding='utf-8') as arquivo_escrita:
+        json.dump(dados, arquivo_escrita, indent=4, ensure_ascii=False)
 
 
 def ler_notas(turma):
@@ -67,21 +79,19 @@ def ler_notas(turma):
     Parâmetros:
         turma (str): nome da turma cujos dados serão lidos
     """
-    # TODO (Passo 1): Monte o caminho do arquivo da mesma forma que em salvar_nota().
+    nome_arquivo = f"{turma.replace(' ', '_')}.json"
+    
+    caminho_arquivo = os.path.join(CAMINHO_PASTA_NOTAS, nome_arquivo)
 
-    # TODO (Passo 2): Verifique se o arquivo existe.
-    #                 Se não existir, imprima uma mensagem adequada e retorne.
+    if not os.path.exists(caminho_arquivo):
+        print(f"Ainda não há registros salvos para a turma '{turma}'.\n")
+        return
 
-    # TODO (Passo 3): Abra o arquivo com open() e carregue os dados com json.load().
+    with open(caminho_arquivo, 'r', encoding='utf-8') as arquivo_leitura:
+        dados = json.load(arquivo_leitura)
 
-    # TODO (Passo 4): Percorra a lista de registros com um loop for.
-    #                 Para cada registro, exiba: nome do aluno, as 3 notas e a média.
-    #                 Formate a saída de forma legível para o usuário.
-    #                 Exemplo de exibição:
-    #
-    #                 Aluno : Maria Silva
-    #                 Nota 1: 8.0  |  Nota 2: 7.5  |  Nota 3: 9.0
-    #                 Média : 8.17
-    #                 ─────────────────────────────
-
-    pass  # ← apague esta linha e escreva seu código aqui
+    for registro in dados:
+        print(f"Aluno : {registro['aluno']}")
+        print(f"Nota 1: {registro['nota1']}  |  Nota 2: {registro['nota2']}  |  Nota 3: {registro['nota3']}")
+        print(f"Média : {registro['media']}")
+        print("─────────────────────────────")

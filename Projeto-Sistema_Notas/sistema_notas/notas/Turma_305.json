@@ -1,0 +1,16 @@
+[
+    {
+        "aluno": "Rafael Nóbrega",
+        "nota1": 6.0,
+        "nota2": 8.9,
+        "nota3": 7.9,
+        "media": 7.6
+    },
+    {
+        "aluno": "Maria Eduarda",
+        "nota1": 6.7,
+        "nota2": 6.7,
+        "nota3": 10.0,
+        "media": 7.8
+    }
+]
